@@ -1,6 +1,6 @@
 # Archive of Old Software Tools
 
-These software is provided for educational purposes only.
+All these software and material are provided for educational purposes only.
 
 Most of the projects were **developed in 2000-2004** using *BORLAND C++ Builder 6.0* platform.
 
