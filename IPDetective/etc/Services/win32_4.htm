@@ -1,0 +1,677 @@
+<HTML><HEAD>
+<TITLE></TITLE>
+</HEAD><BODY>
+
+<LI>
+<A HREF="#CreateMutex">CreateMutex</A></LI>
+
+<LI>
+<A HREF="#CreateSemaphore">CreateSemaphore</A></LI>
+
+<LI>
+<A HREF="#CreateWaitableTimer">CreateWaitableTimer</A></LI>
+
+<LI>
+<A HREF="#DeleteCriticalSection">DeleteCriticalSection</A></LI>
+
+<LI>
+<A HREF="#EnterCriticalSection">EnterCriticalSection</A></LI>
+
+<LI>
+<A HREF="#GetOverlappedResult">GetOverlappedResult</A></LI>
+
+<LI>
+<A HREF="#InitializeCriticalSection">InitializeCriticalSection</A></LI>
+
+<LI>
+<A HREF="#InterlockedCompareExchange">InterlockedCompareExchange</A></LI>
+
+<LI>
+<A HREF="#InterlockedDecrement">InterlockedDecrement</A></LI>
+
+<LI>
+<A HREF="#InterlockedExchange">InterlockedExchange</A></LI>
+</TD>
+
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+<A HREF="#InterlockedExchangeAdd">InterlockedExchangeAdd</A></LI>
+
+<LI>
+<A HREF="#InterlockedIncrement">InterlockedIncrement</A></LI>
+
+<LI>
+<A HREF="#LeaveCriticalSection">LeaveCriticalSection</A></LI>
+
+<LI>
+<A HREF="#MsgWaitForMultipleObjects">MsgWaitForMultipleObjects</A></LI>
+
+<LI>
+<A HREF="#MsgWaitForMultipleObjectsEx">MsgWaitForMultipleObjectsEx</A></LI>
+
+<LI>
+<A HREF="#OpenEvent">OpenEvent</A></LI>
+
+<LI>
+<A HREF="#OpenMutex">OpenMutex</A></LI>
+
+<LI>
+<A HREF="#OpenSemaphore">OpenSemaphore</A></LI>
+
+<LI>
+<A HREF="#OpenWaitableTimer">OpenWaitableTimer</A></LI>
+
+<LI>
+<A HREF="#PulseEvent">PulseEvent</A></LI>
+
+<LI>
+<A HREF="#QueueUserAPC">QueueUserAPC</A></LI>
+</TD>
+
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+<A HREF="#ReleaseMutex">ReleaseMutex</A></LI>
+
+<LI>
+<A HREF="#ReleaseSemaphore">ReleaseSemaphore</A></LI>
+
+<LI>
+<A HREF="#ResetEvent">ResetEvent</A></LI>
+
+<LI>
+<A HREF="#SetEvent">SetEvent</A></LI>
+
+<LI>
+<A HREF="#SetWaitableTimer">SetWaitableTimer</A></LI>
+
+<LI>
+<A HREF="#SignalObjectAndWait">SignalObjectAndWait</A></LI>
+
+<LI>
+<A HREF="#TryEnterCriticalSection">TryEnterCriticalSection</A></LI>
+
+<LI>
+<A HREF="#WaitForMultipleObjects">WaitForMultipleObjects</A></LI>
+
+<LI>
+<A HREF="#WaitForMultipleObjectsEx">WaitForMultipleObjectsEx</A></LI>
+
+<LI>
+<A HREF="#WaitForSingleObject">WaitForSingleObject</A></LI>
+
+<LI>
+<A HREF="#WaitForSingleObjectEx">WaitForSingleObjectEx</A></LI>
+</TD>
+</TR>
+</TABLE>
+
+<HR width="100%">
+<BR>#include &quot;stdafx.h&quot;&nbsp;
+<BR>#include &quot;ole_info.h&quot;&nbsp;
+<BR>
+<BR>#ifdef _DEBUG&nbsp;
+<BR>#undef THIS_FILE&nbsp;
+<BR>static char BASED_CODE THIS_FILE[] = __FILE__;&nbsp;
+<BR>#endif&nbsp;
+<BR>
+<BR>HANDLE MyEvent;&nbsp;
+<BR>CRITICAL_SECTION MyCriticalSection;&nbsp;
+<BR>
+<BR>void MyCritSectProc(LPVOID /*nParameter*/)&nbsp;
+<BR>{&nbsp;
+<BR>while (1){&nbsp;
+<BR>EnterCriticalSection(&amp;MyCriticalSection);&nbsp;
+<BR>ADD_STR(&quot;In worker thread\r\n&quot;);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>LeaveCriticalSection(&amp;MyCriticalSection);&nbsp;
+<BR>}&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>HANDLE hLock;&nbsp;
+<BR>char mutex_msg[100];&nbsp;
+<BR>
+<BR>void MyMutexThreadProc(LPVOID nParameter)&nbsp;
+<BR>{&nbsp;
+<BR>WaitForSingleObject(hLock, INFINITE);&nbsp;
+<BR>sprintf(mutex_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(mutex_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>ReleaseMutex(hLock);&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>HANDLE hSemLock;&nbsp;
+<BR>char sema_msg[100];&nbsp;
+<BR>
+<BR>void MySemaThreadProc(LPVOID nParameter)&nbsp;
+<BR>{&nbsp;
+<BR>WaitForSingleObject(hSemLock, INFINITE);&nbsp;
+<BR>sprintf(sema_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(sema_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>ReleaseSemaphore(hSemLock, 1, NULL);&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="CancelWaitableTimer"></A>CancelWaitableTimer()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>HANDLE waitableTimer;&nbsp;
+<BR>
+<BR>waitableTimer = CreateWaitableTimer(NULL, FALSE, NULL);&nbsp;
+<BR>
+<BR>CancelWaitableTimer(waitableTimer);&nbsp;
+<BR>
+<BR>CloseHandle(waitableTimer);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="CreateEvent"></A>CreateEvent()&nbsp;
+<BR>{&nbsp;
+<BR>MyEvent = CreateEvent(0, FALSE, TRUE, 0);&nbsp;
+<BR>CloseHandle(MyEvent);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="CreateMutex"></A>CreateMutex()&nbsp;
+<BR>{&nbsp;
+<BR>HANDLE hMyThread1, hMyThread2;&nbsp;
+<BR>DWORD MyThreadID1, MyThreadID2;&nbsp;
+<BR>
+<BR>hLock = CreateMutex(NULL, FALSE, NULL);&nbsp;
+<BR>
+<BR>hMyThread1 = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) MyMutexThreadProc,&nbsp;
+<BR>(LPVOID) 24, 0, &amp;MyThreadID1);&nbsp;
+<BR>
+<BR>hMyThread2 = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) MyMutexThreadProc,&nbsp;
+<BR>(LPVOID) 68, 0, &amp;MyThreadID2);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Created two worker threads - will sleep for a while ...\r\n&quot;);&nbsp;
+<BR>
+<BR>Sleep(200);&nbsp;
+<BR>TerminateThread(hMyThread1, 0);&nbsp;
+<BR>
+<BR>Sleep(200);&nbsp;
+<BR>TerminateThread(hMyThread2, 0);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Terminated worker threads\r\n&quot;);&nbsp;
+<BR>CloseHandle(hLock);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="CreateSemaphore"></A>CreateSemaphore()&nbsp;
+<BR>{&nbsp;
+<BR>HANDLE hMyThread1, hMyThread2, hMyThread3;&nbsp;
+<BR>DWORD MyThreadID1, MyThreadID2, MyThreadID3;&nbsp;
+<BR>
+<BR>hSemLock = CreateSemaphore(NULL, 1, 1, NULL);&nbsp;
+<BR>
+<BR>hMyThread1 = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) MySemaThreadProc,&nbsp;
+<BR>(LPVOID) 11, 0, &amp;MyThreadID1);&nbsp;
+<BR>
+<BR>hMyThread2 = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) MySemaThreadProc,&nbsp;
+<BR>(LPVOID) 22, 0, &amp;MyThreadID2);&nbsp;
+<BR>
+<BR>hMyThread3 = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) MySemaThreadProc,&nbsp;
+<BR>(LPVOID) 33, 0, &amp;MyThreadID3);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Created three worker threads - will sleep for a while ...\r\n&quot;);&nbsp;
+<BR>
+<BR>Sleep(1000);&nbsp;
+<BR>TerminateThread(hMyThread1, 0);&nbsp;
+<BR>TerminateThread(hMyThread2, 0);&nbsp;
+<BR>TerminateThread(hMyThread3, 0);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Terminated worker threads\r\n&quot;);&nbsp;
+<BR>CloseHandle(hSemLock);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="CreateWaitableTimer"></A>CreateWaitableTimer()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>HANDLE waitableTimer;&nbsp;
+<BR>
+<BR>waitableTimer = CreateWaitableTimer(NULL, FALSE, NULL);&nbsp;
+<BR>
+<BR>CloseHandle(waitableTimer);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="DeleteCriticalSection"></A>DeleteCriticalSection()&nbsp;
+<BR>{&nbsp;
+<BR>HANDLE hMyThread;&nbsp;
+<BR>DWORD MyThreadID;&nbsp;
+<BR>
+<BR>InitializeCriticalSection(&amp;MyCriticalSection);&nbsp;
+<BR>
+<BR>hMyThread = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) MyCritSectProc,&nbsp;
+<BR>NULL, 0, &amp;MyThreadID);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Created Worker thread - will sleep for a while ...\r\n&quot;);&nbsp;
+<BR>
+<BR>Sleep(200);&nbsp;
+<BR>
+<BR>TerminateThread(hMyThread, 0);&nbsp;
+<BR>DeleteCriticalSection(&amp;MyCriticalSection);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Terminated worker thread\r\n&quot;);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="EnterCriticalSection"></A>EnterCriticalSection()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>EnterCriticalSection(&amp;MyCriticalSection);&nbsp;
+<BR>ADD_STR(&quot;In worker thread\r\n&quot;);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>LeaveCriticalSection(&amp;MyCriticalSection);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="GetOverlappedResult"></A>GetOverlappedResult()&nbsp;
+<BR>{&nbsp;
+<BR>char buf[100];&nbsp;
+<BR>DWORD dwBytesRead;&nbsp;
+<BR>DWORD dwCurBytesRead;&nbsp;
+<BR>OVERLAPPED ol;&nbsp;
+<BR>
+<BR>ol.Offset = 10;&nbsp;
+<BR>ol.OffsetHigh = 0;&nbsp;
+<BR>ol.hEvent = NULL;&nbsp;
+<BR>
+<BR>HANDLE hFile = CreateFile(&quot;overlap.test&quot;, GENERIC_READ,&nbsp;
+<BR>FILE_SHARE_WRITE, 0, OPEN_EXISTING,&nbsp;
+<BR>FILE_FLAG_OVERLAPPED, 0);&nbsp;
+<BR>
+<BR>ReadFile(hFile, buf, 100, &amp;dwBytesRead, &amp;ol);&nbsp;
+<BR>
+<BR>// perform other tasks in this thread&nbsp;
+<BR>///...&nbsp;
+<BR>
+<BR>
+<BR>// Synchronise with file I/O&nbsp;
+<BR>WaitForSingleObject(hFile, INFINITE);&nbsp;
+<BR>
+<BR>GetOverlappedResult(hFile, &amp;ol, &amp;dwCurBytesRead, TRUE);&nbsp;
+<BR>CloseHandle(hFile);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>
+<BR>}&nbsp;
+<BR>#include &quot;stdafx.h&quot;&nbsp;
+<BR>#include &quot;ole_info.h&quot;&nbsp;
+<BR>
+<BR>#ifdef _DEBUG&nbsp;
+<BR>#undef THIS_FILE&nbsp;
+<BR>static char BASED_CODE THIS_FILE[] = __FILE__;&nbsp;
+<BR>#endif&nbsp;
+<BR>
+<BR>CRITICAL_SECTION My1CriticalSection;&nbsp;
+<BR>
+<BR>void My1CritSectProc(LPVOID /*nParameter*/)&nbsp;
+<BR>{&nbsp;
+<BR>while (1){&nbsp;
+<BR>EnterCriticalSection(&amp;My1CriticalSection);&nbsp;
+<BR>ADD_STR(&quot;In worker thread\r\n&quot;);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>LeaveCriticalSection(&amp;My1CriticalSection);&nbsp;
+<BR>}&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="InitializeCriticalSection"></A>InitializeCriticalSection()&nbsp;
+<BR>{&nbsp;
+<BR>HANDLE hMyThread;&nbsp;
+<BR>DWORD MyThreadID;&nbsp;
+<BR>
+<BR>hMyThread = CreateThread(NULL, 0,&nbsp;
+<BR>(LPTHREAD_START_ROUTINE) My1CritSectProc,&nbsp;
+<BR>NULL, 0, &amp;MyThreadID);&nbsp;
+<BR>
+<BR>InitializeCriticalSection(&amp;My1CriticalSection);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Created Worker thread - will sleep for a while ...\r\n&quot;);&nbsp;
+<BR>
+<BR>Sleep(200);&nbsp;
+<BR>
+<BR>TerminateThread(hMyThread, 0);&nbsp;
+<BR>DeleteCriticalSection(&amp;My1CriticalSection);&nbsp;
+<BR>
+<BR>ADD_STR(&quot;Terminated worker thread\r\n&quot;);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="InterlockedCompareExchange"></A>InterlockedCompareExchange()&nbsp;
+<BR>{&nbsp;
+<BR>LONG value=10;&nbsp;
+<BR>
+<BR>// InterlockedCompareExchange(&amp;value, 10, 20);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="InterlockedDecrement"></A>InterlockedDecrement()&nbsp;
+<BR>{&nbsp;
+<BR>LONG value=10;&nbsp;
+<BR>
+<BR>InterlockedDecrement(&amp;value);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="InterlockedExchange"></A>InterlockedExchange()&nbsp;
+<BR>{&nbsp;
+<BR>LONG value=10;&nbsp;
+<BR>
+<BR>InterlockedExchange(&amp;value,20);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="InterlockedExchangeAdd"></A>InterlockedExchangeAdd()&nbsp;
+<BR>{&nbsp;
+<BR>LONG value=10;&nbsp;
+<BR>
+<BR>// InterlockedExchangeAdd(&amp;value,2);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="InterlockedIncrement"></A>InterlockedIncrement()&nbsp;
+<BR>{&nbsp;
+<BR>LONG value=10;&nbsp;
+<BR>
+<BR>InterlockedIncrement(&amp;value);&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="LeaveCriticalSection"></A>LeaveCriticalSection()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>EnterCriticalSection(&amp;My1CriticalSection);&nbsp;
+<BR>ADD_STR(&quot;In worker thread\r\n&quot;);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>LeaveCriticalSection(&amp;My1CriticalSection);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="MsgWaitForMultipleObjects"></A>MsgWaitForMultipleObjects()&nbsp;
+<BR>{&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="MsgWaitForMultipleObjectsEx"></A>MsgWaitForMultipleObjectsEx()&nbsp;
+<BR>{&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>HANDLE MyOpenTestEvent, MyCreateTestEvent;&nbsp;
+<BR>
+<BR>char *fnc_<A NAME="OpenEvent"></A>OpenEvent()&nbsp;
+<BR>{&nbsp;
+<BR>// Create an event, and set it in the signaled state&nbsp;
+<BR>MyCreateTestEvent = CreateEvent(0, FALSE, TRUE, &quot;abc&quot;);&nbsp;
+<BR>
+<BR>MyOpenTestEvent = OpenEvent(EVENT_ALL_ACCESS, TRUE, &quot;abc&quot;);&nbsp;
+<BR>
+<BR>if (!MyOpenTestEvent)&nbsp;
+<BR>RET_ERR(&quot;OpenEvent&quot;);&nbsp;
+<BR>
+<BR>CloseHandle(MyOpenTestEvent);&nbsp;
+<BR>CloseHandle(MyCreateTestEvent);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="OpenMutex"></A>OpenMutex()&nbsp;
+<BR>{&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="OpenSemaphore"></A>OpenSemaphore()&nbsp;
+<BR>{&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>
+<BR>}&nbsp;
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="OpenWaitableTimer"></A>OpenWaitableTimer()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>HANDLE createdWaitableTimer;&nbsp;
+<BR>HANDLE openedWaitableTimer;&nbsp;
+<BR>
+<BR>createdWaitableTimer = CreateWaitableTimer(NULL, FALSE, &quot;abc&quot;);&nbsp;
+<BR>openedWaitableTimer = OpenWaitableTimer(TIMER_ALL_ACCESS, NULL, &quot;abc&quot;);&nbsp;
+<BR>SetWaitableTimer(waitableTimer);&nbsp;
+<BR>
+<BR>CloseHandle(createdWaitableTimer);&nbsp;
+<BR>CloseHandle(openedWaitableTimer);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>#include &quot;stdafx.h&quot;&nbsp;
+<BR>#include &quot;ole_info.h&quot;&nbsp;
+<BR>
+<BR>#ifdef _DEBUG&nbsp;
+<BR>#undef THIS_FILE&nbsp;
+<BR>static char BASED_CODE THIS_FILE[] = __FILE__;&nbsp;
+<BR>#endif&nbsp;
+<BR>
+<BR>HANDLE MyTestEvent;&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="PulseEvent"></A>PulseEvent()&nbsp;
+<BR>{&nbsp;
+<BR>// Create an event, and set it in the signaled state&nbsp;
+<BR>MyTestEvent = CreateEvent(0, FALSE, TRUE, 0);&nbsp;
+<BR>
+<BR>// Wait for the event to be signaled&nbsp;
+<BR>WaitForSingleObject(MyTestEvent, INFINITE);&nbsp;
+<BR>
+<BR>PulseEvent(MyTestEvent);&nbsp;
+<BR>CloseHandle(MyTestEvent);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="QueueUserAPC"></A>QueueUserAPC()&nbsp;
+<BR>{&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="ReleaseMutex"></A>ReleaseMutex()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>WaitForSingleObject(hLock, INFINITE);&nbsp;
+<BR>sprintf(mutex_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(mutex_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>ReleaseMutex(hLock);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="ReleaseSemaphore"></A>ReleaseSemaphore()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>WaitForSingleObject(hSemLock, INFINITE);&nbsp;
+<BR>sprintf(sema_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(sema_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>ReleaseSemaphore(hSemLock, 1, NULL);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>
+<BR>char *fnc_<A NAME="ResetEvent"></A>ResetEvent()&nbsp;
+<BR>{&nbsp;
+<BR>// Create an event, and set it in the signaled state&nbsp;
+<BR>MyTestEvent = CreateEvent(0, TRUE, TRUE, 0);&nbsp;
+<BR>
+<BR>// Wait for the event to be signaled&nbsp;
+<BR>WaitForSingleObject(MyTestEvent, INFINITE);&nbsp;
+<BR>
+<BR>// As it is a manual reset event, reset it&nbsp;
+<BR>ResetEvent(MyTestEvent);&nbsp;
+<BR>CloseHandle(MyTestEvent);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>
+<BR>char *fnc_<A NAME="SetEvent"></A>SetEvent()&nbsp;
+<BR>{&nbsp;
+<BR>// Create an event, and set it in the signaled state&nbsp;
+<BR>MyTestEvent = CreateEvent(0, FALSE, TRUE, 0);&nbsp;
+<BR>
+<BR>// Wait for the event to be signaled&nbsp;
+<BR>WaitForSingleObject(MyTestEvent, INFINITE);&nbsp;
+<BR>
+<BR>SetEvent(MyTestEvent);&nbsp;
+<BR>CloseHandle(MyTestEvent);&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="SetWaitableTimer"></A>SetWaitableTimer()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>HANDLE waitableTimer;&nbsp;
+<BR>
+<BR>waitableTimer = CreateWaitableTimer(NULL, FALSE, NULL);&nbsp;
+<BR>
+<BR>SetWaitableTimer(waitableTimer);&nbsp;
+<BR>
+<BR>CloseHandle(waitableTimer);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="SignalObjectAndWait"></A>SignalObjectAndWait()&nbsp;
+<BR>{&nbsp;
+<BR>
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="TryEnterCriticalSection"></A>TryEnterCriticalSection()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>CRITICAL_SECTION MyTestSection;&nbsp;
+<BR>
+<BR>InitializeCriticalSection(&amp;MyTestSection);&nbsp;
+<BR>TryEnterCriticalSection(&amp;MyTestSection);&nbsp;
+<BR>
+<BR>DeleteCriticalSection(&amp;MyTestSection);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="WaitForMultipleObjects"></A>WaitForMultipleObjects()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>WaitForMultipleObjects(handleCount, handleArray, TRUE, 0);&nbsp;
+<BR>sprintf(mutex_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(mutex_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="WaitForMultipleObjectsEx"></A>WaitForMultipleObjectsEx()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>WaitForMultipleObjectsEx(handleCount, handleArray, TRUE, 0, FALSE);&nbsp;
+<BR>sprintf(mutex_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(mutex_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="WaitForSingleObject"></A>WaitForSingleObject()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>WaitForSingleObject(hLock, INFINITE);&nbsp;
+<BR>sprintf(mutex_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(mutex_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>ReleaseMutex(hLock);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+<BR>// ----------------------------------------------------------------------------&nbsp;
+<BR>char *fnc_<A NAME="WaitForSingleObjectEx"></A>WaitForSingleObjectEx()&nbsp;
+<BR>{&nbsp;
+<BR>/*&nbsp;
+<BR>WaitForSingleObjectEx(hLock, INFINITE, FALSE);&nbsp;
+<BR>sprintf(mutex_msg, &quot;In worker thread number %d\r\n&quot;, nParameter);&nbsp;
+<BR>int i;&nbsp;
+<BR>for (i=0; i&lt;5;i++)&nbsp;
+<BR>{&nbsp;
+<BR>ADD_STR(mutex_msg);&nbsp;
+<BR>Sleep(10);&nbsp;
+<BR>}&nbsp;
+<BR>ReleaseMutex(hLock);&nbsp;
+<BR>*/&nbsp;
+<BR>return result_buffer;&nbsp;
+<BR>}&nbsp;
+<BR>
+
+</BODY>
+</HTML>

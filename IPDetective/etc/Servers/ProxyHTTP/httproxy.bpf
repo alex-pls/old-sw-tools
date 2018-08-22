@@ -1,0 +1,7 @@
+USEUNIT("httproxy.cpp");
+USERES("httproxy.res");
+USEUNIT("proxy.c");
+//---------------------------------------------------------------------------
+This file is used by the project manager only and should be treated like the project file
+
+DllEntryPoint

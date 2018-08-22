@@ -1,0 +1,1373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <TITLE>Examples of using the Win32 Toolhelp APIs (only runs on Win95/Win98/Win2000, but not Win NT 4)</TITLE>
+</HEAD>
+<BODY TEXT="#000066" BGCOLOR="#FFFFFF" LINK="#0000CC" VLINK="#0000CC" ALINK="#0000CC">
+
+<H1>
+<FONT SIZE=+1><A HREF="../systems/snippets.htm">Return to previous page</A></FONT></H1>
+<B><FONT SIZE=+2>Toolhelp </FONT>(N.B. These functions only work on Windows 2000, Windows 9x: they do not work on WIndows NT 4)</B>&nbsp;
+
+<TABLE CELLPADDING=8 >
+<TR>
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+<A HREF="win32_2.htm#CreateToolhelp32Snapshot">CreateToolhelp32Snapshot</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Heap32First">Heap32First</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Heap32ListFirst">Heap32ListFirst</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Heap32ListNext">Heap32ListNext</A></LI>
+</TD>
+
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+<A HREF="win32_2.htm#Heap32Next">Heap32Next</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Module32First">Module32First</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Module32Next">Module32Next</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Process32First">Process32First</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Process32Next">Process32Next</A></LI>
+</TD>
+
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+<A HREF="win32_2.htm#Thread32First">Thread32First</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Thread32Next">Thread32Next</A></LI>
+
+<LI>
+<A HREF="win32_2.htm#Toolhelp32ReadProcessMemory">Toolhelp32ReadProcessMemory</A></LI>
+</TD>
+</TR>
+</TABLE>
+
+<PRE>
+<HR width="100%">char *fnc_<A NAME="CreateToolhelp32Snapshot"></A>CreateToolhelp32Snapshot()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving function CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[This function is NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>// can now use the snapshot</PRE>
+
+<PRE>// ...</PRE>
+
+<PRE>// ...</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Heap32First"></A>Heap32First()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32LISTFIRST)(HANDLE hSnapshot, LPHEAPLIST32 pEntry);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32FIRST)(LPHEAPENTRY32 pEntry, DWORD pid, DWORD heapId);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>HEAPLIST32 hl32;</PRE>
+
+<PRE>HEAPENTRY32 heap32;</PRE>
+
+<PRE>LPVOID lpMsgBuf;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>HEAP32LISTFIRST pHeap32ListFirst = (HEAP32LISTFIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32ListFirst&quot;);</PRE>
+
+<PRE>HEAP32FIRST pHeap32First = (HEAP32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32First&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pHeap32ListFirst || !pHeap32First)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Heap32ListFirst or Heap32First\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPHEAPLIST, pid))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>hl32.dwSize = sizeof(HEAPLIST32);</PRE>
+
+<PRE>if (!pHeap32ListFirst(hSnapshot, &amp;hl32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>FormatMessage(&nbsp;</PRE>
+
+<PRE>FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,</PRE>
+
+<PRE>NULL,GetLastError(),</PRE>
+
+<PRE>MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language</PRE>
+
+<PRE>(LPTSTR) &amp;lpMsgBuf,0,NULL);&nbsp;</PRE>
+
+<PRE>ADD_STR((char*)lpMsgBuf);ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>LocalFree(lpMsgBuf);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>if (!pHeap32First(&amp;heap32, pid, hl32.th32HeapID))&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error occurred\r\n&quot;);</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;Heap32First worked\r\n&quot;);</PRE>
+
+<PRE>// use the heap block info</PRE>
+
+<PRE>// ....</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Heap32ListFirst"></A>Heap32ListFirst()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32LISTFIRST)(HANDLE hSnapshot, LPHEAPLIST32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>HEAPLIST32 hl32;</PRE>
+
+<PRE>LPVOID lpMsgBuf;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>HEAP32LISTFIRST pHeap32ListFirst = (HEAP32LISTFIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32ListFirst&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pHeap32ListFirst)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Heap32ListFirst\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPHEAPLIST, pid))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>hl32.dwSize = sizeof(HEAPLIST32);</PRE>
+
+<PRE>if (!pHeap32ListFirst(hSnapshot, &amp;hl32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>FormatMessage(&nbsp;</PRE>
+
+<PRE>FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,</PRE>
+
+<PRE>NULL,</PRE>
+
+<PRE>GetLastError(),</PRE>
+
+<PRE>MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language</PRE>
+
+<PRE>(LPTSTR) &amp;lpMsgBuf,</PRE>
+
+<PRE>0,</PRE>
+
+<PRE>NULL);&nbsp;</PRE>
+
+<PRE>ADD_STR((char*)lpMsgBuf);ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>LocalFree(lpMsgBuf);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;First heap for the current process is = %d\r\n&quot;, hl32.th32HeapID);&nbsp;</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Heap32ListNext"></A>Heap32ListNext()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32LISTFIRST)(HANDLE hSnapshot, LPHEAPLIST32 pEntry);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32LISTNEXT)(HANDLE hSnapshot, LPHEAPLIST32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>HEAPLIST32 hl32;</PRE>
+
+<PRE>LPVOID lpMsgBuf;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>HEAP32LISTFIRST pHeap32ListFirst = (HEAP32LISTFIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32ListFirst&quot;);</PRE>
+
+<PRE>HEAP32LISTNEXT pHeap32ListNext = (HEAP32LISTNEXT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32ListNext&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pHeap32ListFirst || !pHeap32ListNext)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Heap32ListFirst or Heap32ListNext\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPHEAPLIST, pid))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>hl32.dwSize = sizeof(HEAPLIST32);</PRE>
+
+<PRE>if (!pHeap32ListFirst(hSnapshot, &amp;hl32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>FormatMessage(&nbsp;</PRE>
+
+<PRE>FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,</PRE>
+
+<PRE>NULL,GetLastError(),</PRE>
+
+<PRE>MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language</PRE>
+
+<PRE>(LPTSTR) &amp;lpMsgBuf,0,NULL);&nbsp;</PRE>
+
+<PRE>ADD_STR((char*)lpMsgBuf);ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>LocalFree(lpMsgBuf);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;Heaps for the current process are:\r\n &quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>do&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>str.Format(&quot;%lu\r\n &quot;, hl32.th32HeapID);&nbsp;</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+</UL>
+
+<PRE>} while (pHeap32ListNext(hSnapshot, &amp;hl32));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;\r\nCloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Heap32Next"></A>Heap32Next()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32LISTFIRST)(HANDLE hSnapshot, LPHEAPLIST32 pEntry);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32FIRST)(LPHEAPENTRY32 pEntry, DWORD pid, DWORD heapId);</PRE>
+
+<PRE>typedef BOOL (WINAPI *HEAP32NEXT)(LPHEAPENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>HEAPLIST32 hl32;</PRE>
+
+<PRE>HEAPENTRY32 heap32;</PRE>
+
+<PRE>LPVOID lpMsgBuf;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>HEAP32LISTFIRST pHeap32ListFirst = (HEAP32LISTFIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32ListFirst&quot;);</PRE>
+
+<PRE>HEAP32FIRST pHeap32First = (HEAP32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32First&quot;);</PRE>
+
+<PRE>HEAP32NEXT pHeap32Next = (HEAP32NEXT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Heap32Next&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pHeap32ListFirst || !pHeap32First || !pHeap32Next)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Heap32ListFirst or Heap32First or Heap32Next\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPHEAPLIST, pid))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>hl32.dwSize = sizeof(HEAPLIST32);</PRE>
+
+<PRE>if (!pHeap32ListFirst(hSnapshot, &amp;hl32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>FormatMessage(&nbsp;</PRE>
+
+<PRE>FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,</PRE>
+
+<PRE>NULL,GetLastError(),</PRE>
+
+<PRE>MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language</PRE>
+
+<PRE>(LPTSTR) &amp;lpMsgBuf,0,NULL);&nbsp;</PRE>
+
+<PRE>ADD_STR((char*)lpMsgBuf);ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>LocalFree(lpMsgBuf);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>if (!pHeap32First(&amp;heap32, pid, hl32.th32HeapID))&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error occurred\r\n&quot;);</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;Heap32First worked\r\n&quot;);</PRE>
+
+<PRE>do</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>// use the heap block info</PRE>
+
+<PRE>// ....</PRE>
+
+<PRE>ADD_STR(&quot;Calling Heap32Next\r\n&quot;);</PRE>
+</UL>
+
+<PRE>} while (pHeap32Next(&amp;heap32));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Module32First"></A>Module32First()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *MODULE32FIRST)(HANDLE hSnapshot, LPMODULEENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>MODULEENTRY32 me32;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>MODULE32FIRST pModule32First = (MODULE32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Module32First&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pModule32First)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Module32First\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>me32.dwSize = sizeof(MODULEENTRY32);</PRE>
+
+<PRE>if (!pModule32First(hSnapshot, &amp;me32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;No running processes or else an error occured!\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;First module for the current process is = &quot;);&nbsp;</PRE>
+
+<PRE>ADD_STR(me32.szModule); ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Module32Next"></A>Module32Next()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *MODULE32FIRST)(HANDLE hSnapshot, LPMODULEENTRY32 pEntry);</PRE>
+
+<PRE>typedef BOOL (WINAPI *MODULE32NEXT)(HANDLE hSnapshot, LPMODULEENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>MODULEENTRY32 me32;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>MODULE32FIRST pModule32First = (MODULE32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Module32First&quot;);</PRE>
+
+<PRE>MODULE32NEXT pModule32Next = (MODULE32NEXT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Module32Next&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pModule32First || !pModule32Next)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Module32First or Module32Next\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>me32.dwSize = sizeof(MODULEENTRY32);</PRE>
+
+<PRE>if (!pModule32First(hSnapshot, &amp;me32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;No running processes or else an error occured!\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;Modules for the current process:\r\n &quot;);</PRE>
+
+<PRE>do</PRE>
+
+<PRE>{&nbsp;</PRE>
+
+<UL>
+<PRE>ADD_STR(me32.szModule); ADD_STR(&quot;\r\n &quot;);</PRE>
+</UL>
+
+<PRE>} while (pModule32Next(hSnapshot, &amp;me32));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;\r\nCloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Process32First"></A>Process32First()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *PROCESS32FIRST)(HANDLE hSnapshot, LPPROCESSENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>PROCESSENTRY32 pe32;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>PROCESS32FIRST pProcess32First = (PROCESS32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Process32First&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pProcess32First)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Process32First\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>pe32.dwSize = sizeof(PROCESSENTRY32);</PRE>
+
+<PRE>if (!pProcess32First(hSnapshot, &amp;pe32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;No running processes or else an error occured!\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;exe file for first process in list = &quot;);&nbsp;</PRE>
+
+<PRE>ADD_STR(pe32.szExeFile); ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Process32Next"></A>Process32Next()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *PROCESS32FIRST)(HANDLE hSnapshot, LPPROCESSENTRY32 pEntry);</PRE>
+
+<PRE>typedef BOOL (WINAPI *PROCESS32NEXT)(HANDLE hSnapshot, LPPROCESSENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>PROCESSENTRY32 pe32;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>PROCESS32FIRST pProcess32First = (PROCESS32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Process32First&quot;);</PRE>
+
+<PRE>PROCESS32NEXT pProcess32Next = (PROCESS32NEXT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Process32Next&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pProcess32First|| !pProcess32Next)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Process32First or Process32Next\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>pe32.dwSize = sizeof(PROCESSENTRY32);</PRE>
+
+<PRE>if (!pProcess32First(hSnapshot, &amp;pe32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;No running processes or else an error occured!\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>ADD_STR(&quot;List of running processes\r\n &quot;);</PRE>
+
+<PRE>do</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(pe32.szExeFile); ADD_STR(&quot;\r\n &quot;);</PRE>
+</UL>
+
+<PRE>} while (pProcess32Next(hSnapshot, &amp;pe32));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;\r\nCloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Thread32First"></A>Thread32First()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *THREAD32FIRST)(HANDLE hSnapshot, LPTHREADENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>THREADENTRY32 te32;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>THREAD32FIRST pThread32First = (THREAD32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Thread32First&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pThread32First)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Thread32First\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>te32.dwSize = sizeof(THREADENTRY32);</PRE>
+
+<PRE>if (!pThread32First(hSnapshot, &amp;te32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;No running threads or else an error occured!\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;thread id for first thread = %lu\r\n&quot;, te32.th32ThreadID);&nbsp;</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Thread32Next"></A>Thread32Next()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef HANDLE (WINAPI *CREATESNAPSHOT)(DWORD dwFlags, DWORD dwProcID);</PRE>
+
+<PRE>typedef BOOL (WINAPI *THREAD32FIRST)(HANDLE hSnapshot, LPTHREADENTRY32 pEntry);</PRE>
+
+<PRE>typedef BOOL (WINAPI *THREAD32NEXT)(HANDLE hSnapshot, LPTHREADENTRY32 pEntry);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>HANDLE hSnapshot;</PRE>
+
+<PRE>THREADENTRY32 te32;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>CREATESNAPSHOT pCreateToolhelp32Snapshot = (CREATESNAPSHOT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;CreateToolhelp32Snapshot&quot;);</PRE>
+
+<PRE>THREAD32FIRST pThread32First = (THREAD32FIRST)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Thread32First&quot;);</PRE>
+
+<PRE>THREAD32NEXT pThread32Next = (THREAD32NEXT)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Thread32Next&quot;);</PRE>
+
+<PRE>if (!pCreateToolhelp32Snapshot || !pThread32First || !pThread32Next)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving functions CreateToolhelp32Snapshot or Thread32First or Thread32Next\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[These functions are NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>if ((hSnapshot = pCreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0))==(void*)-1)&nbsp;</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Called CreateToolhelp32Snapshot\r\n&quot;);</PRE>
+
+<PRE>te32.dwSize = sizeof(THREADENTRY32);</PRE>
+
+<PRE>if (!pThread32First(hSnapshot, &amp;te32))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;No running threads or else an error occured!\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>do</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;thread id = %lu\r\n&quot;, te32.th32ThreadID);&nbsp;</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+</UL>
+
+<PRE>}</PRE>
+
+<PRE>while (pThread32Next(hSnapshot, &amp;te32));</PRE>
+
+<PRE>// When finished, close the handle</PRE>
+
+<PRE>CloseHandle(hSnapshot);</PRE>
+
+<PRE>ADD_STR(&quot;CloseHandle for hSnapshot called\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="Toolhelp32ReadProcessMemory"></A>Toolhelp32ReadProcessMemory()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>typedef BOOL (WINAPI *TOOLHELP32READPROCESSMEMORY)(DWORD, LPCVOID, LPVOID, DWORD, LPDWORD);</PRE>
+
+<PRE>HMODULE hKernel;</PRE>
+
+<PRE>hKernel = GetModuleHandle(&quot;KERNEL32.DLL&quot;);</PRE>
+
+<PRE>if (!hKernel)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving handle to kernel dll\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>TOOLHELP32READPROCESSMEMORY pToolhelp32ReadProcessMemory = (TOOLHELP32READPROCESSMEMORY)</PRE>
+
+<PRE>GetProcAddress(hKernel, &quot;Toolhelp32ReadProcessMemory&quot;);</PRE>
+
+<PRE>if (!pToolhelp32ReadProcessMemory)</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error retrieving function Toolhelp32ReadProcessMemory\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;[This function is NOT supported on WINDOWS NT 4]\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>BYTE buf[5];</PRE>
+
+<PRE>DWORD dwLen;</PRE>
+
+<PRE>DWORD pid=GetCurrentProcessId();</PRE>
+
+<PRE>if (!pToolhelp32ReadProcessMemory(pid, 0, (LPVOID)buf, 20, &amp;dwLen))</PRE>
+
+<PRE>{</PRE>
+
+<UL>
+<PRE>ADD_STR(&quot;Error with Toolhelp32ReadProcessMemory\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+</UL>
+
+<PRE>}&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Toolhelp32ReadProcessMemory worked\r\n&quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;First five bytes of current process are: %x, %x, %x, %x, %x\r\n&quot;,&nbsp;</PRE>
+
+<PRE>buf[0], buf[1], buf[2], buf[3], buf[4]);</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+</BODY>
+</HTML>

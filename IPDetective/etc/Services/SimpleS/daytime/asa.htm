@@ -1,0 +1,109 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>/* TCPdtc</title>
+		<meta name="Generator" content="Microsoft Word 73.1">
+	</head>
+
+	<body>
+		<font face="Times">
+		<table cool width="733" height="2260" border="0" cellpadding="0" cellspacing="0" gridx="16" showgridx usegridx gridy="16" showgridy usegridy>
+			<tr height="1" cntrlrow>
+				<td width="1" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="224" height="1"><spacer type="block" width="224" height="1"></td>
+				<td width="208" height="1"><spacer type="block" width="208" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="44" height="1"><spacer type="block" width="44" height="1"></td>
+				<td width="84" height="1"><spacer type="block" width="84" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="96" height="1"><spacer type="block" width="96" height="1"></td>
+				<td width="28" height="1"><spacer type="block" width="28" height="1"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="224" height="16"></td>
+				<td width="208" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="44" height="16"></td>
+				<td width="84" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="96" height="16"></td>
+				<td width="28" height="16"></td>
+			</tr>
+			<tr height="96">
+				<td width="1" height="96"><spacer type="block" width="1" height="96"></td>
+				<td width="16" height="96"></td>
+				<td width="576" height="96" colspan="5" rowspan="1" valign="top" align="left" xpos="16" content csheight="80">
+					<center>
+						<font color="#770000" size="5">Summary of Daytime Client's conTCP Function (C++)</font></center>
+					<div align="left">
+						<p>The component called conTCP performs the basic task of making a TCP connection.</div>
+				</td>
+				<td width="16" height="96"></td>
+				<td width="96" height="96"></td>
+				<td width="28" height="96"></td>
+			</tr>
+			<tr height="32">
+				<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				<td width="16" height="32"></td>
+				<td width="224" height="32" colspan="1" rowspan="1" valign="top" align="left" xpos="16" content csheight="32">
+					<center>
+						<font color="#000077"><b>PROGRAM LISTING </b></font></center>
+				</td>
+				<td width="208" height="32"></td>
+				<td width="16" height="32"></td>
+				<td width="44" height="32"></td>
+				<td width="224" height="32" colspan="4" rowspan="1" valign="top" align="left" xpos="508" content csheight="32">
+					<center>
+						<font color="#550000"><b>COMMENTS ON PROGRAM</b></font><font color="#000077"><b> </b></font></center>
+				</td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="576" height="16" colspan="5" rowspan="1" valign="top" align="left" xpos="16">
+					<hr size="2" width="560">
+				</td>
+				<td width="16" height="16"></td>
+				<td width="96" height="16"></td>
+				<td width="28" height="16"></td>
+			</tr>
+			<tr height="1166">
+				<td width="1" height="1166"><spacer type="block" width="1" height="1166"></td>
+				<td width="16" height="1166"></td>
+				<td width="432" height="1166" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="224">/* conTCP.cpp - connectTCP */
+					<pre>
+#include &lt;winsock.h&gt;
+
+SOCKET connectsock(const char *, const char *, const char *);
+
+/*----------------------------------------------------------------
+* connectTCP(connect to a specified TCP service on a specifed host
+*-----------------------------------------------------------------
+*/
+
+SOCKET
+connectTCP(const char *host, const char *service )
+{
+        return connectsock( host, service, &quot;tcp&quot;);
+<font face="Times">}</font></pre>
+				</td>
+				<td width="16" height="1166"></td>
+				<td width="240" height="1166" colspan="4" rowspan="1" valign="top" align="left" xpos="464" content csheight="55"><font color="#770000">This function simply calls the function &quot;connectsock&quot; with the TCP protocol specified.  The connectsock function was of type SOCK and this must be declared, as shown.  </font></td>
+				<td width="28" height="1166"></td>
+			</tr>
+			<tr height="933">
+				<td width="1" height="933"><spacer type="block" width="1" height="933"></td>
+				<td width="16" height="933"></td>
+				<td width="592" height="933" colspan="6" rowspan="1" valign="top" align="left" xpos="16" content csheight="211"></td>
+				<td width="96" height="933"></td>
+				<td width="28" height="933"></td>
+			</tr>
+		</table>
+		</font>
+	</body>
+
+</html>

@@ -1,0 +1,2176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <TITLE>Examples of using Windows NT 4/Windows 2000 Security APIs</TITLE>
+</HEAD>
+<BODY TEXT="#000066" BGCOLOR="#FFFFFF" LINK="#0000CC" VLINK="#0000CC" ALINK="#0000CC">
+<H1>
+<FONT SIZE=+1><A HREF="../systems/snippets.htm">Return to previous page</A></FONT></H1>
+<B><FONT SIZE=+2>Security</FONT></B>&nbsp;
+
+<TABLE CELLPADDING=8 >
+<TR>
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+AccessCheck</LI>
+
+<LI>
+AccessCheck</LI>
+
+<LI>
+AndAuditAlarm&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#AddAccessAllowedAce">AddAccessAllowedAce&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#AddAccessDeniedAce">AddAccessDeniedAce&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#AddAce">AddAce&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#AddAuditAccessAce">AddAuditAccessAce&nbsp;</A></LI>
+
+<LI>
+AdjustTokenGroups&nbsp;</LI>
+
+<LI>
+AdjustTokenPrivileges&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#AllocateAndInitializeSid">AllocateAndInitializeSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#AllocateLocallyUniqueId">AllocateLocallyUniqueId&nbsp;</A></LI>
+
+<LI>
+AreAllAccessesGranted&nbsp;</LI>
+
+<LI>
+AreAnyAccessesGranted&nbsp;</LI>
+
+<LI>
+BuildExplicitAccessWithName&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#BuildSecurityDescriptor">BuildSecurityDescriptor&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#BuildTrusteeWithName">BuildTrusteeWithName&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#BuildTrusteeWithSid">BuildTrusteeWithSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#CopySid">CopySid&nbsp;</A></LI>
+
+<LI>
+CreateProcessAsUser&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#DeleteAce">DeleteAce&nbsp;</A></LI>
+
+<LI>
+DuplicateToken&nbsp;</LI>
+
+<LI>
+DuplicateTokenEx&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#EqualPrefixSid">EqualPrefixSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#EqualSid">EqualSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#FindFirstFreeAce">FindFirstFreeAce&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#FreeSid">FreeSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetAce">GetAce&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetAclInformation">GetAclInformation&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetAuditedPermissionsFromAcl">GetAuditedPermissionsFromAcl&nbsp;</A></LI>
+</TD>
+
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+<A HREF="win32_1.htm#GetEffectiveRightsFromAcl">GetEffectiveRightsFromAcl&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetExplicitEntriesFromAcl">GetExplicitEntriesFromAcl&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetLengthSid">GetLengthSid&nbsp;</A></LI>
+
+<LI>
+GetNamedSecurityInfo&nbsp;</LI>
+
+<LI>
+GetProcessWindowStation&nbsp;</LI>
+
+<LI>
+GetSecurityDescriptorControl&nbsp;</LI>
+
+<LI>
+GetSecurityDescriptorDacl&nbsp;</LI>
+
+<LI>
+GetSecurityDescriptorGroup&nbsp;</LI>
+
+<LI>
+GetSecurityDescriptorLength&nbsp;</LI>
+
+<LI>
+GetSecurityDescriptorOwner&nbsp;</LI>
+
+<LI>
+GetSecurityDescriptorSacl&nbsp;</LI>
+
+<LI>
+GetSecurityInfo&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#GetSidIdentifierAuthority">GetSidIdentifierAuthority&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetSidLengthRequired">GetSidLengthRequired&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetSidSubAuthority">GetSidSubAuthority&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetSidSubAuthorityCount">GetSidSubAuthorityCount&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetTokenInformation">GetTokenInformation&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetTrusteeForm">GetTrusteeForm&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetTrusteeName">GetTrusteeName&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#GetTrusteeType">GetTrusteeType&nbsp;</A></LI>
+
+<LI>
+ImpersonateLoggedOnUser&nbsp;</LI>
+
+<LI>
+ImpersonateNamedPipeClient&nbsp;</LI>
+
+<LI>
+ImpersonateSelf&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#InitializeAcl">InitializeAcl&nbsp;</A></LI>
+
+<LI>
+InitializeSecurityDescriptor&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#InitializeSid">InitializeSid&nbsp;</A></LI>
+
+<LI>
+IsValidAcl&nbsp;</LI>
+</TD>
+
+<TD bgcolor="#fff7d6" valign="top" nowrap>
+<LI>
+IsValidSecurityDescriptor&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#IsValidSid">IsValidSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#LookupAccountName">LookupAccountName&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#LookupAccountSid">LookupAccountSid&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#LookupPrivilegeDisplayName">LookupPrivilegeDisplayName&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#LookupPrivilegeName">LookupPrivilegeName&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#LookupPrivilegeValue">LookupPrivilegeValue&nbsp;</A></LI>
+
+<LI>
+LookupSecurityDescriptorParts&nbsp;</LI>
+
+<LI>
+MakeAbsoluteSD&nbsp;</LI>
+
+<LI>
+MakeSelfRelativeSD&nbsp;</LI>
+
+<LI>
+MapGenericMask&nbsp;</LI>
+
+<LI>
+ObjectCloseAuditAlarm&nbsp;</LI>
+
+<LI>
+ObjectDeleteAuditAlarm&nbsp;</LI>
+
+<LI>
+ObjectOpenAuditAlarm&nbsp;</LI>
+
+<LI>
+ObjectPrivilegeAuditAlarm&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#OpenProcessToken">OpenProcessToken&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#OpenThreadToken">OpenThreadToken&nbsp;</A></LI>
+
+<LI>
+<A HREF="win32_1.htm#PrivilegeCheck">PrivilegeCheck&nbsp;</A></LI>
+
+<LI>
+PrivilegedServiceAuditAlarm&nbsp;</LI>
+
+<LI>
+RevertToSelf&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#SetAclInformation">SetAclInformation&nbsp;</A></LI>
+
+<LI>
+SetEntriesInAcl&nbsp;</LI>
+
+<LI>
+SetNamedSecurityInfo&nbsp;</LI>
+
+<LI>
+SetSecurityDescriptorDacl&nbsp;</LI>
+
+<LI>
+SetSecurityDescriptorGroup&nbsp;</LI>
+
+<LI>
+SetSecurityDescriptorOwner&nbsp;</LI>
+
+<LI>
+SetSecurityDescriptorSacl&nbsp;</LI>
+
+<LI>
+SetSecurityInfo&nbsp;</LI>
+
+<LI>
+<A HREF="win32_1.htm#SetThreadToken">SetThreadToken&nbsp;</A></LI>
+
+<LI>
+SetTokenInformation</LI>
+</TD>
+</TR>
+</TABLE>
+
+<PRE>
+<HR width="100%">char *fnc_<A NAME="AddAccessAllowedAce"></A>AddAccessAllowedAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<UL>
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+</UL>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<UL>
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+</UL>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<UL>
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+</UL>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<UL>
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+</UL>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<UL>
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+</UL>
+
+<PRE>ADD_STR(&quot;may now use the ACL .....\r\n&quot;);</PRE>
+
+<PRE>// Now use the acl</PRE>
+
+<PRE>// .....</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="AddAccessDeniedAce"></A>AddAccessDeniedAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_DENIED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessDeniedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessDeniedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessDeniedAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;may now use the ACL .....\r\n&quot;);</PRE>
+
+<PRE>// Now use the acl</PRE>
+
+<PRE>// .....</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="AddAce"></A>AddAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl1=NULL, *pAcl2=NULL;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>PVOID pAce;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>pAcl1 = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize);</PRE>
+
+<PRE>pAcl2 = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize);</PRE>
+
+<PRE>if (!pAcl1 || !pAcl2)</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if (!InitializeAcl(pAcl1, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>if (!InitializeAcl(pAcl2, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl1, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Copying an ACE from one ACL to the other using GetAce and AddAce\r\n&quot;);</PRE>
+
+<PRE>if (!GetAce(pAcl1, 0, &amp;pAce))</PRE>
+
+<PRE>RET_ERR(&quot;GetAce&quot;);</PRE>
+
+<PRE>if (!AddAce(pAcl2, ACL_REVISION, MAXDWORD, pAce, ((PACE_HEADER)pAce)-&gt;AceSize))</PRE>
+
+<PRE>RET_ERR(&quot;AddAce&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl1);</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl2);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="AddAuditAccessAce"></A>AddAuditAccessAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(SYSTEM_AUDIT_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAuditAccessAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAuditAccessAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>GENERIC_ALL, pUserSid, TRUE, TRUE))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAuditAccessAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;may now use the ACL .....\r\n&quot;);</PRE>
+
+<PRE>// Now use the acl</PRE>
+
+<PRE>// .....</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="AllocateAndInitializeSid"></A>AllocateAndInitializeSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="AllocateLocallyUniqueId"></A>AllocateLocallyUniqueId()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>LUID luid;</PRE>
+
+<PRE>if (!AllocateLocallyUniqueId(&amp;luid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateLocallyUniqueId&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="BuildSecurityDescriptor"></A>BuildSecurityDescriptor()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>TRUSTEE trusteeUser;</PRE>
+
+<PRE>TRUSTEE trusteeGroup;</PRE>
+
+<PRE>ULONG ulLenNewSid;</PRE>
+
+<PRE>PSECURITY_DESCRIPTOR pNewSid;</PRE>
+
+<PRE>ADD_STR(&quot;Creating TRUSTEEs for user and group\r\n&quot;);</PRE>
+
+<PRE>BuildTrusteeWithName(&amp;trusteeUser, &quot;Administrator&quot;);</PRE>
+
+<PRE>BuildTrusteeWithName(&amp;trusteeGroup, &quot;Administrators&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling BuildSecurityDescriptor\r\n&quot;);</PRE>
+
+<PRE>if (!BuildSecurityDescriptor(&amp;trusteeUser, &amp;trusteeGroup,</PRE>
+
+<PRE>0,NULL,0,NULL, NULL, &amp;ulLenNewSid, &amp;pNewSid))</PRE>
+
+<PRE>RET_ERR(&quot;BuildSecurityDescriptor&quot;);</PRE>
+
+<PRE>// User Security Descriptor</PRE>
+
+<PRE>// ...</PRE>
+
+<PRE>// When finished, free it</PRE>
+
+<PRE>LocalFree(pNewSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="BuildTrusteeWithName"></A>BuildTrusteeWithName()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>ADD_STR(&quot;Calling BuildTrusteeWithName&quot;);</PRE>
+
+<PRE>BuildTrusteeWithName(&amp;trustee, &quot;clipcode&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="BuildTrusteeWithSid"></A>BuildTrusteeWithSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling BuildTrusteeWithSid&quot;);</PRE>
+
+<PRE>BuildTrusteeWithSid(&amp;trustee, pSid);</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="CopySid"></A>CopySid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>#define SID_LEN 20</PRE>
+
+<PRE>PSID pOrigSid;</PRE>
+
+<PRE>void *pCopiedSid[SID_LEN];</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pOrigSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling CopySid\r\n&quot;);</PRE>
+
+<PRE>if (!CopySid(SID_LEN, pCopiedSid, pOrigSid))</PRE>
+
+<PRE>RET_ERR(&quot;CopySid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;CopySid worked\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pOrigSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="DeleteAce"></A>DeleteAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Now deleting ACE which we just added\r\n&quot;);</PRE>
+
+<PRE>if(!DeleteAce(pAcl, 0))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;DeleteAce&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="EqualPrefixSid"></A>EqualPrefixSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>#define SID_LEN 20</PRE>
+
+<PRE>PSID pOrigSid1, pOrigSid2;</PRE>
+
+<PRE>void *pCopiedSid[SID_LEN];</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pOrigSid1)</PRE>
+
+<PRE>||</PRE>
+
+<PRE>!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pOrigSid2)</PRE>
+
+<PRE>)</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling CopySid\r\n&quot;);</PRE>
+
+<PRE>if (!CopySid(SID_LEN, pCopiedSid, pOrigSid1))</PRE>
+
+<PRE>RET_ERR(&quot;CopySid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;CopySid worked\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling EqualSid\r\n&quot;);</PRE>
+
+<PRE>if (EqualPrefixSid(pCopiedSid, pOrigSid1))</PRE>
+
+<PRE>ADD_STR(&quot;One of the original sids and its copy are the same (Correct)\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;One of the original sids and its copy are NOT the same (Incorrect)\r\n&quot;);</PRE>
+
+<PRE>if (EqualPrefixSid(pOrigSid1, pOrigSid2))</PRE>
+
+<PRE>ADD_STR(&quot;the two original sids are not the same (Correct)\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;the two original sids are the same (Incorrect)\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pOrigSid1);</PRE>
+
+<PRE>FreeSid(pOrigSid2);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="EqualSid"></A>EqualSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>#define SID_LEN 20</PRE>
+
+<PRE>PSID pOrigSid1, pOrigSid2;</PRE>
+
+<PRE>void *pCopiedSid[SID_LEN];</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pOrigSid1)</PRE>
+
+<PRE>||</PRE>
+
+<PRE>!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pOrigSid2)</PRE>
+
+<PRE>)</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling CopySid\r\n&quot;);</PRE>
+
+<PRE>if (!CopySid(SID_LEN, pCopiedSid, pOrigSid1))</PRE>
+
+<PRE>RET_ERR(&quot;CopySid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;CopySid worked\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling EqualSid\r\n&quot;);</PRE>
+
+<PRE>if (EqualSid(pCopiedSid, pOrigSid1))</PRE>
+
+<PRE>ADD_STR(&quot;One of the original sids and its copy are the same (Correct)\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;One of the original sids and its copy are NOT the same (Incorrect)\r\n&quot;);</PRE>
+
+<PRE>if (EqualSid(pOrigSid1, pOrigSid2))</PRE>
+
+<PRE>ADD_STR(&quot;the two original sids are not the same (Correct)\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;the two original sids are the same (Incorrect)\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pOrigSid1);</PRE>
+
+<PRE>FreeSid(pOrigSid2);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="FindFirstFreeAce"></A>FindFirstFreeAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>PVOID pAce;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling FindFirstFreeAce\r\n&quot;);</PRE>
+
+<PRE>if (!FindFirstFreeAce(pAcl, &amp;pAce))</PRE>
+
+<PRE>RET_ERR(&quot;FindFirstFreeAce&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="FreeSid"></A>FreeSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetAce"></A>GetAce()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl1=NULL, *pAcl2=NULL;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>PVOID pAce;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>pAcl1 = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize);</PRE>
+
+<PRE>pAcl2 = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize);</PRE>
+
+<PRE>if (!pAcl1 || !pAcl2)</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if (!InitializeAcl(pAcl1, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>if (!InitializeAcl(pAcl2, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl1, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Copying an ACE from one ACL to the other using GetAce and AddAce\r\n&quot;);</PRE>
+
+<PRE>if (!GetAce(pAcl1, 0, &amp;pAce))</PRE>
+
+<PRE>RET_ERR(&quot;GetAce&quot;);</PRE>
+
+<PRE>if (!AddAce(pAcl2, ACL_REVISION, MAXDWORD, pAce, ((PACE_HEADER)pAce)-&gt;AceSize))</PRE>
+
+<PRE>RET_ERR(&quot;AddAce&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl1);</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl2);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetAclInformation"></A>GetAclInformation()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>ACL_REVISION_INFORMATION revision;</PRE>
+
+<PRE>if (!GetAclInformation(pAcl, &amp;revision, sizeof(revision), AclRevisionInformation))</PRE>
+
+<PRE>RET_ERR(&quot;GetAclInformation&quot;);</PRE>
+
+<PRE>if (revision.AclRevision == ACL_REVISION)</PRE>
+
+<PRE>ADD_STR(&quot;Revision is ACL_REVISION\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;Revision is not ACL_REVISION\r\n&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetAuditedPermissionsFromAcl"></A>GetAuditedPermissionsFromAcl()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(SYSTEM_AUDIT_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAuditAccessAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAuditAccessAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>GENERIC_ALL, pUserSid, TRUE, TRUE))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAuditAccessAce&quot;);</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>ACCESS_MASK successMask=0;</PRE>
+
+<PRE>ACCESS_MASK failMask=0;</PRE>
+
+<PRE>trustee.pMultipleTrustee = NULL;</PRE>
+
+<PRE>trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;</PRE>
+
+<PRE>trustee.TrusteeForm = TRUSTEE_IS_SID;</PRE>
+
+<PRE>trustee.TrusteeType = TRUSTEE_IS_USER;</PRE>
+
+<PRE>trustee.ptstrName = (char*) pUserSid;</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetAuditedPermissionsFromAcl\r\n&quot;);</PRE>
+
+<PRE>if (!GetAuditedPermissionsFromAcl(pAcl, &amp;trustee, &amp;successMask, &amp;failMask))</PRE>
+
+<PRE>RET_ERR(&quot;GetAuditedPermissionsFromAcl&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetEffectiveRightsFromAcl"></A>GetEffectiveRightsFromAcl()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(SYSTEM_AUDIT_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>GENERIC_ALL, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>ACCESS_MASK accessMask=0;</PRE>
+
+<PRE>trustee.pMultipleTrustee = NULL;</PRE>
+
+<PRE>trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;</PRE>
+
+<PRE>trustee.TrusteeForm = TRUSTEE_IS_SID;</PRE>
+
+<PRE>trustee.TrusteeType = TRUSTEE_IS_USER;</PRE>
+
+<PRE>trustee.ptstrName = (char*) pUserSid;</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetEffectiveRightsFromAcl\r\n&quot;);</PRE>
+
+<PRE>if (!GetEffectiveRightsFromAcl(pAcl, &amp;trustee, &amp;accessMask))</PRE>
+
+<PRE>RET_ERR(&quot;GetEffectiveRightsFromAcl&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetExplicitEntriesFromAcl"></A>GetExplicitEntriesFromAcl()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(SYSTEM_AUDIT_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>GENERIC_ALL, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>PEXPLICIT_ACCESS explicitAccess=NULL;</PRE>
+
+<PRE>ULONG num=0;</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetExplicitEntriesFromAcl\r\n&quot;);</PRE>
+
+<PRE>if (!GetExplicitEntriesFromAcl(pAcl, &amp;num, &amp;explicitAccess))</PRE>
+
+<PRE>RET_ERR(&quot;GetExplicitEntriesFromAcl&quot;);</PRE>
+
+<PRE>LocalFree(explicitAccess);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetLengthSid"></A>GetLengthSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetLengthSid\r\n&quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;Sid length = %d\r\n&quot;, GetLengthSid(pSid));</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetSidIdentifierAuthority"></A>GetSidIdentifierAuthority()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>37,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY *pIdAuth = GetSidIdentifierAuthority(pSid);</PRE>
+
+<PRE>if (pIdAuth-&gt;Value[5] == 5)</PRE>
+
+<PRE>ADD_STR(&quot;NT Authority is the Identifier Authority - Expected\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;NT Authority is not the Identifier Authority - Not expected\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetSidLengthRequired"></A>GetSidLengthRequired()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetSidLengthRequired\r\n&quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;Sid length Required for %d sub-authorities = %d\r\n&quot;,&nbsp;</PRE>
+
+<PRE>5, GetSidLengthRequired(5));</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetSidSubAuthority"></A>GetSidSubAuthority()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>37,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetSidSubAuthority\r\n&quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>DWORD *ch = GetSidSubAuthority(pSid, 0);</PRE>
+
+<PRE>str.Format(&quot;The first SidSubAuthority should be 37 and GetSidSubAuthority returned = %d\r\n&quot;, *ch);&nbsp;</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetSidSubAuthorityCount"></A>GetSidSubAuthorityCount()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>37,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling GetSidSubAuthorityCount\r\n&quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>UCHAR *ch = GetSidSubAuthorityCount(pSid);</PRE>
+
+<PRE>str.Format(&quot;SidSubAuthorityCount = %d\r\n&quot;, *ch);&nbsp;</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetTokenInformation"></A>GetTokenInformation()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>HANDLE token;</PRE>
+
+<PRE>int type;</PRE>
+
+<PRE>DWORD dwLen;</PRE>
+
+<PRE>ADD_STR(&quot;Calling OpenProcessToken to retrieve the token handle of the current process\r\n&quot;);</PRE>
+
+<PRE>if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &amp;token))</PRE>
+
+<PRE>RET_ERR(&quot;OpenProcessToken&quot;);</PRE>
+
+<PRE>if (!GetTokenInformation(token, TokenType, &amp;type, sizeof(type), &amp;dwLen))</PRE>
+
+<PRE>RET_ERR(&quot;GetTokenInformation&quot;);</PRE>
+
+<PRE>if (type == TokenPrimary)</PRE>
+
+<PRE>ADD_STR(&quot;TokenPrimary is the type\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;TokenImpersonation is the type\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetTrusteeForm"></A>GetTrusteeForm()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>/*</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>trustee.pMultipleTrustee = NULL;</PRE>
+
+<PRE>trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;</PRE>
+
+<PRE>trustee.TrusteeForm = TRUSTEE_IS_SID;</PRE>
+
+<PRE>trustee.TrusteeType = TRUSTEE_IS_USER;</PRE>
+
+<PRE>if (GetTrusteeForm(&amp;trustee) == TRUSTEE_IS_SID)</PRE>
+
+<PRE>ADD_STR(&quot;Trustee form is TRUSTEE_IS_SID\r\n&quot;);</PRE>
+
+<PRE>else if (GetTrusteeForm(&amp;trustee) == TRUSTEE_IS_NAME)</PRE>
+
+<PRE>ADD_STR(&quot;Trustee form is TRUSTEE_IS_NAME\r\n&quot;);</PRE>
+
+<PRE>else&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Trustee form unknown\r\n&quot;);</PRE>
+
+<PRE>*/</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetTrusteeName"></A>GetTrusteeName()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>char MyName[]={&quot;Clipcode&quot;};</PRE>
+
+<PRE>trustee.pMultipleTrustee = NULL;</PRE>
+
+<PRE>trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;</PRE>
+
+<PRE>trustee.TrusteeForm = TRUSTEE_IS_SID;</PRE>
+
+<PRE>trustee.TrusteeType = TRUSTEE_IS_USER;</PRE>
+
+<PRE>trustee.ptstrName = MyName;</PRE>
+
+<PRE>ADD_STR(GetTrusteeName(&amp;trustee));</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="GetTrusteeType"></A>GetTrusteeType()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>TRUSTEE trustee;</PRE>
+
+<PRE>trustee.pMultipleTrustee = NULL;</PRE>
+
+<PRE>trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;</PRE>
+
+<PRE>trustee.TrusteeForm = TRUSTEE_IS_SID;</PRE>
+
+<PRE>trustee.TrusteeType = TRUSTEE_IS_USER;</PRE>
+
+<PRE>if (GetTrusteeType(&amp;trustee) == TRUSTEE_IS_USER)</PRE>
+
+<PRE>ADD_STR(&quot;Trustee type is TRUSTEE_IS_USER\r\n&quot;);</PRE>
+
+<PRE>else if (GetTrusteeType(&amp;trustee) == TRUSTEE_IS_GROUP)</PRE>
+
+<PRE>ADD_STR(&quot;Trustee type is TRUSTEE_IS_GROUP\r\n&quot;);</PRE>
+
+<PRE>else if (GetTrusteeType(&amp;trustee) == TRUSTEE_IS_UNKNOWN)</PRE>
+
+<PRE>ADD_STR(&quot;Trustee type is TRUSTEE_IS_UNKNOWN\r\n&quot;);</PRE>
+
+<PRE>else&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Trustee type unknown\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="InitializeAcl"></A>InitializeAcl()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;may now use the ACL .....\r\n&quot;);</PRE>
+
+<PRE>// Now use the acl</PRE>
+
+<PRE>// .....</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="InitializeSid"></A>InitializeSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Allocating memory for Sid\r\n&quot;);</PRE>
+
+<PRE>pSid = (PSID)LocalAlloc(LPTR,GetSidLengthRequired( 1 ));&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!InitializeSid(pSid, &amp;IdAuthority, 1))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeSid&quot;);</PRE>
+
+<PRE>*(GetSidSubAuthority( pSid, 0)) = SECURITY_LOCAL_RID;</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="IsValidSid"></A>IsValidSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>if (!IsValidSid(pSid))</PRE>
+
+<PRE>RET_ERR(&quot;IsValidSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;IsValidSid worked\r\n&quot;);</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="LookupAccountName"></A>LookupAccountName()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>char strBuf[100];&nbsp;</PRE>
+
+<PRE>DWORD dw_BufSize=100;</PRE>
+
+<PRE>char strRefDomain[100];&nbsp;</PRE>
+
+<PRE>DWORD dw_RefSize=100;</PRE>
+
+<PRE>char sid[100];</PRE>
+
+<PRE>DWORD dw_nSidSize=100;</PRE>
+
+<PRE>SID_NAME_USE sidNameUse;</PRE>
+
+<PRE>char mybuf[100];</PRE>
+
+<PRE>sprintf(mybuf, &quot;Calling GetUserName to retrieve user name of current process\r\n&quot;);</PRE>
+
+<PRE>strcat(result_buffer, mybuf);</PRE>
+
+<PRE>if (!GetUserName(strBuf, &amp;dw_BufSize))</PRE>
+
+<PRE>RET_ERR(&quot;GetUserName&quot;);</PRE>
+
+<PRE>ADD_STR(strBuf); ADD_STR(&quot; is the user name.\r\nCalling LookupAccountName\r\n&quot;);</PRE>
+
+<PRE>if (!LookupAccountName(NULL, strBuf, sid, &amp;dw_nSidSize,strRefDomain,&amp;dw_RefSize,&amp;sidNameUse))</PRE>
+
+<PRE>RET_ERR(&quot;LookupAccountName&quot;);</PRE>
+
+<PRE>ADD_STR(strRefDomain); ADD_STR(&quot; is the domain\r\n&quot;);</PRE>
+
+<PRE>ADD_STR(&quot; sidNameUse is set to &quot;);</PRE>
+
+<PRE>if (sidNameUse == SidTypeUser)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeUser&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeGroup)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeGroup&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeDomain)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeDomain&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeAlias)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeAlias&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeWellKnownGroup)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeWellKnownGroup&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeDeletedAccount)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeDeletedAccount&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeInvalid)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeInvalid&quot;);</PRE>
+
+<PRE>else if (sidNameUse == SidTypeUnknown)</PRE>
+
+<PRE>ADD_STR(&quot;SidTypeUnknown&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot;Unknown&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="LookupAccountSid"></A>LookupAccountSid()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>char strAccountName[100];&nbsp;</PRE>
+
+<PRE>DWORD cbAccountName=100;</PRE>
+
+<PRE>char strRefDomain[100];&nbsp;</PRE>
+
+<PRE>DWORD dw_RefSize=100;</PRE>
+
+<PRE>SID_NAME_USE sidNameUse;</PRE>
+
+<PRE>PSID pSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ADD_STR(&quot;Calling AllocateAndInitializeSid\r\n&quot;);</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>1,0,0,0,0,0,0,0,(PSID*)&amp;pSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;AllocateAndInitializeSid worked\r\n&quot;);</PRE>
+
+<PRE>if (!LookupAccountSid(NULL, pSid, strAccountName, &amp;cbAccountName, strRefDomain,&amp;dw_RefSize,&amp;sidNameUse))</PRE>
+
+<PRE>RET_ERR(&quot;LookupAccountSid&quot;);</PRE>
+
+<PRE>CString str;</PRE>
+
+<PRE>str.Format(&quot;Account Name = %s\r\n&quot;, strAccountName);</PRE>
+
+<PRE>ADD_STR(str.GetBuffer(0));</PRE>
+
+<PRE>FreeSid(pSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="LookupPrivilegeDisplayName"></A>LookupPrivilegeDisplayName()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>char str[100];</PRE>
+
+<PRE>DWORD strlen = 100;&nbsp;</PRE>
+
+<PRE>char strDisp[100];</PRE>
+
+<PRE>DWORD strDispLen = 100;&nbsp;</PRE>
+
+<PRE>LUID luid;</PRE>
+
+<PRE>DWORD lang = LANG_NEUTRAL;</PRE>
+
+<PRE>if (!LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME, &amp;luid))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeValue&quot;);</PRE>
+
+<PRE>if (!LookupPrivilegeName(NULL, &amp;luid, str, &amp;strlen))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeName&quot;);</PRE>
+
+<PRE>if (!LookupPrivilegeDisplayName(NULL, str, strDisp, &amp;strDispLen, &amp;lang))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeDisplayName&quot;);</PRE>
+
+<PRE>ADD_STR(strDisp);&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot; is the displayable privilege name for the SE_SHUTDOWN_NAME privilege\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="LookupPrivilegeName"></A>LookupPrivilegeName()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>char str[100];</PRE>
+
+<PRE>DWORD strlen = 100;&nbsp;</PRE>
+
+<PRE>LUID luid;</PRE>
+
+<PRE>if (!LookupPrivilegeValue(NULL, SE_TCB_NAME, &amp;luid))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeValue&quot;);</PRE>
+
+<PRE>if (!LookupPrivilegeName(NULL, &amp;luid, str, &amp;strlen))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeName&quot;);</PRE>
+
+<PRE>ADD_STR(str);&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot; is the privilege name for the SE_TCB_NAME privilege\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="LookupPrivilegeValue"></A>LookupPrivilegeValue()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>char str[100];</PRE>
+
+<PRE>DWORD strlen = 100;&nbsp;</PRE>
+
+<PRE>LUID luid;</PRE>
+
+<PRE>if (!LookupPrivilegeValue(NULL, SE_SYSTEMTIME_NAME, &amp;luid))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeValue&quot;);</PRE>
+
+<PRE>if (!LookupPrivilegeName(NULL, &amp;luid, str, &amp;strlen))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeName&quot;);</PRE>
+
+<PRE>ADD_STR(str);&nbsp;</PRE>
+
+<PRE>ADD_STR(&quot; is the privilege name for the SE_SYSTEMTIME_NAME privilege\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="OpenProcessToken"></A>OpenProcessToken()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>HANDLE token;</PRE>
+
+<PRE>ADD_STR(&quot;Calling OpenProcessToken to retrieve the token handle of the current process\r\n&quot;);</PRE>
+
+<PRE>if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &amp;token))</PRE>
+
+<PRE>RET_ERR(&quot;OpenProcessToken&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="OpenThreadToken"></A>OpenThreadToken()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>HANDLE token;</PRE>
+
+<PRE>ADD_STR(&quot;Calling OpenThreadToken to retrieve the token handle of the current thread\r\n&quot;);</PRE>
+
+<PRE>if (!OpenThreadToken(GetCurrentThread(), TOKEN_ALL_ACCESS, TRUE, &amp;token))</PRE>
+
+<PRE>RET_ERR(&quot;OpenThreadToken&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="PrivilegeCheck"></A>PrivilegeCheck()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>HANDLE token;</PRE>
+
+<PRE>PRIVILEGE_SET privset;</PRE>
+
+<PRE>BOOL bResult;</PRE>
+
+<PRE>ADD_STR(&quot;Setting up the PRIVILEGE_SET to contain SE_SHUTDOWN_NAME\r\n&quot;);</PRE>
+
+<PRE>privset.PrivilegeCount = 1;</PRE>
+
+<PRE>privset.Control = PRIVILEGE_SET_ALL_NECESSARY;</PRE>
+
+<PRE>privset.Privilege[0].Attributes = 0;</PRE>
+
+<PRE>if (!LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME, &amp;privset.Privilege[0].Luid))</PRE>
+
+<PRE>RET_ERR(&quot;LookupPrivilegeValue&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling OpenProcessToken to retrieve the token handle of the current process\r\n&quot;);</PRE>
+
+<PRE>if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &amp;token))</PRE>
+
+<PRE>RET_ERR(&quot;OpenProcessToken&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling PrivilegeCheck to determine if we may shut down the system\r\n&quot;);</PRE>
+
+<PRE>if (!PrivilegeCheck(token, &amp;privset, &amp;bResult))</PRE>
+
+<PRE>RET_ERR(&quot;PrivilegeCheck&quot;);</PRE>
+
+<PRE>if (bResult)</PRE>
+
+<PRE>ADD_STR(&quot; Result: Yes, we may shut down the system\r\n&quot;);</PRE>
+
+<PRE>else</PRE>
+
+<PRE>ADD_STR(&quot; Result: No, we may not shut down the system\r\n&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="SetAclInformation"></A>SetAclInformation()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>PSID pUserSid;</PRE>
+
+<PRE>SID_IDENTIFIER_AUTHORITY IdAuthority = SECURITY_NT_AUTHORITY;</PRE>
+
+<PRE>ACL *pAcl;</PRE>
+
+<PRE>DWORD dwAclSize;</PRE>
+
+<PRE>if (!AllocateAndInitializeSid(&amp;IdAuthority, 1,&nbsp;</PRE>
+
+<PRE>SECURITY_INTERACTIVE_RID,</PRE>
+
+<PRE>0, 0, 0, 0, 0, 0, 0,&nbsp;</PRE>
+
+<PRE>&amp;pUserSid))</PRE>
+
+<PRE>RET_ERR(&quot;AllocateAndInitializeSid&quot;);</PRE>
+
+<PRE>dwAclSize = sizeof(ACL) + sizeof(ACCESS_ALLOWED_ACE)&nbsp;</PRE>
+
+<PRE>+ GetLengthSid(pUserSid) - sizeof(DWORD) ;&nbsp;</PRE>
+
+<PRE>if (!(pAcl = (PACL)HeapAlloc(GetProcessHeap(), 0, dwAclSize)))</PRE>
+
+<PRE>RET_ERR(&quot;HeapAlloc&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling InitializeAcl\r\n&quot;);</PRE>
+
+<PRE>if(!InitializeAcl(pAcl, dwAclSize, ACL_REVISION))</PRE>
+
+<PRE>RET_ERR(&quot;InitializeAcl&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling AddAccessAllowedAce\r\n&quot;);</PRE>
+
+<PRE>if(!AddAccessAllowedAce(pAcl, ACL_REVISION,</PRE>
+
+<PRE>PROCESS_ALL_ACCESS, pUserSid))&nbsp;</PRE>
+
+<PRE>RET_ERR(&quot;AddAccessAllowedAce&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Using SetAclInformation to set revision to 45\r\n&quot;);</PRE>
+
+<PRE>ACL_REVISION_INFORMATION revision;</PRE>
+
+<PRE>revision.AclRevision == 45;</PRE>
+
+<PRE>if (!SetAclInformation(pAcl, &amp;revision, sizeof(revision), AclRevisionInformation))</PRE>
+
+<PRE>RET_ERR(&quot;SetAclInformation&quot;);</PRE>
+
+<PRE>//When finished</PRE>
+
+<PRE>HeapFree(GetProcessHeap(), 0, pAcl);</PRE>
+
+<PRE>FreeSid(pUserSid);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+<PRE>// ----------------------------------------------------------------------------</PRE>
+
+<PRE>char *fnc_<A NAME="SetThreadToken"></A>SetThreadToken()</PRE>
+
+<PRE>{</PRE>
+
+<PRE>HANDLE token;</PRE>
+
+<PRE>ADD_STR(&quot;Calling OpenProcessToken to retrieve the token handle of the current process\r\n&quot;);</PRE>
+
+<PRE>if (!OpenProcessToken(GetCurrentProcess(), TOKEN_IMPERSONATE, &amp;token))</PRE>
+
+<PRE>RET_ERR(&quot;OpenProcessToken&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling SetThreadToken to set the token handle of the current thread\r\n&quot;);</PRE>
+
+<PRE>if (!SetThreadToken(NULL, token))</PRE>
+
+<PRE>RET_ERR(&quot;SetThreadToken&quot;);</PRE>
+
+<PRE>ADD_STR(&quot;Calling OpenThreadToken to retrieve the token handle of the current thread\r\n&quot;);</PRE>
+
+<PRE>if (!OpenThreadToken(GetCurrentThread(), TOKEN_ALL_ACCESS, TRUE, &amp;token))</PRE>
+
+<PRE>RET_ERR(&quot;OpenThreadToken&quot;);</PRE>
+
+<PRE>return result_buffer;</PRE>
+
+<PRE>}</PRE>
+
+</BODY>
+</HTML>

@@ -1,0 +1,352 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>/* TCPdtc</title>
+		<meta name="Generator" content="Microsoft Word 73.1">
+	</head>
+
+	<body>
+		<font face="Times">
+		<table cool width="625" height="2260" border="0" cellpadding="0" cellspacing="0" gridx="16" showgridx usegridx gridy="16" showgridy usegridy>
+			<tr height="1" cntrlrow>
+				<td width="1" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="112" height="1"><spacer type="block" width="112" height="1"></td>
+				<td width="64" height="1"><spacer type="block" width="64" height="1"></td>
+				<td width="48" height="1"><spacer type="block" width="48" height="1"></td>
+				<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+				<td width="20" height="1"><spacer type="block" width="20" height="1"></td>
+				<td width="4" height="1"><spacer type="block" width="4" height="1"></td>
+				<td width="40" height="1"><spacer type="block" width="40" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="68" height="1"><spacer type="block" width="68" height="1"></td>
+				<td width="20" height="1"><spacer type="block" width="20" height="1"></td>
+				<td width="8" height="1"><spacer type="block" width="8" height="1"></td>
+				<td width="8" height="1"><spacer type="block" width="8" height="1"></td>
+				<td width="8" height="1"><spacer type="block" width="8" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="112" height="16"></td>
+				<td width="64" height="16"></td>
+				<td width="48" height="16"></td>
+				<td width="80" height="16"></td>
+				<td width="20" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="40" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="80" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="68" height="16"></td>
+				<td width="20" height="16"></td>
+				<td width="8" height="16"></td>
+				<td width="8" height="16"></td>
+				<td width="8" height="16"></td>
+				<td width="16" height="16"></td>
+			</tr>
+			<tr height="96">
+				<td width="1" height="96"><spacer type="block" width="1" height="96"></td>
+				<td width="16" height="96"></td>
+				<td width="576" height="96" colspan="13" rowspan="1" valign="top" align="left" xpos="16" content csheight="80">
+					<center>
+						<font color="#770000" size="5">Summary of Daytime Client's ConSock Function (C++)</font></center>
+					<div align="left">
+						<p>The component called consock.cpp performs the basic task of connecting your program to a remote host and service. The host and service were determined by the main() program included in DTClient.cpp and discussed elsewhere in these notes. .</div>
+				</td>
+				<td width="8" height="96"></td>
+				<td width="8" height="96"></td>
+				<td width="16" height="96"></td>
+			</tr>
+			<tr height="32">
+				<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				<td width="16" height="32"></td>
+				<td width="224" height="32" colspan="3" rowspan="1" valign="top" align="left" xpos="16" content csheight="32">
+					<center>
+						<font color="#000077"><b>PROGRAM LISTING </b></font></center>
+				</td>
+				<td width="80" height="32"></td>
+				<td width="20" height="32"></td>
+				<td width="224" height="32" colspan="6" rowspan="1" valign="top" align="left" xpos="340" content csheight="32">
+					<center>
+						<font color="#550000"><b>COMMENTS ON PROGRAM</b></font><font color="#000077"><b> </b></font></center>
+				</td>
+				<td width="20" height="32"></td>
+				<td width="8" height="32"></td>
+				<td width="8" height="32"></td>
+				<td width="8" height="32"></td>
+				<td width="16" height="32"></td>
+			</tr>
+			<tr height="32">
+				<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				<td width="16" height="32"></td>
+				<td width="568" height="32" colspan="12" rowspan="1" valign="top" align="left" xpos="16">
+					<hr size="2" width="560">
+				</td>
+				<td width="8" height="32"></td>
+				<td width="8" height="32"></td>
+				<td width="8" height="32"></td>
+				<td width="16" height="32"></td>
+			</tr>
+			<tr height="210">
+				<td width="1" height="210"><spacer type="block" width="1" height="210"></td>
+				<td width="16" height="210"></td>
+				<td width="304" height="210" colspan="4" rowspan="1" valign="top" align="left" xpos="16" content csheight="161">/* consock.cpp - connectsock */
+					<pre>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;winsock.h&gt;
+
+#ifndef INADDR_NONE
+#define INADDR_NONE
+#endif /* INADDR_NONE */
+
+void errexit(const char *, ...);</pre>
+				</td>
+				<td width="20" height="210"></td>
+				<td width="4" height="210"></td>
+				<td width="240" height="210" colspan="6" rowspan="1" valign="top" align="left" xpos="344" content csheight="151"><font color="#770000">The declarations at the start of the consock.cpp program include the standard library, standard i/o, strings, and the winsock protocols. Also, if the name INADDR_NONE is not defined, it is defined here.<br>
+					<br>
+					This function will call the errexit function (procedure - I will not be precise in distinguishing) and this function must be defined. The declaration void errexit does this. When the overall program is built, consock will be linked into the overall program.</font></td>
+				<td width="8" height="210"></td>
+				<td width="8" height="210"></td>
+				<td width="8" height="210"></td>
+				<td width="16" height="210"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="568" height="16" colspan="12" rowspan="1" valign="top" align="left" xpos="16">
+					<hr size="2" width="560">
+				</td>
+				<td width="8" height="16"></td>
+				<td width="8" height="16"></td>
+				<td width="8" height="16"></td>
+				<td width="16" height="16"></td>
+			</tr>
+			<tr height="398">
+				<td width="1" height="398"><spacer type="block" width="1" height="398"></td>
+				<td width="16" height="398"></td>
+				<td width="304" height="398" colspan="4" rowspan="1" valign="top" align="left" xpos="16" content csheight="377">/*-------------------------------------------------------------------
+					<pre>* connectsock - allocate &amp; connect a socket
+  using TCP or UDP
+*------------------------------------------
+*/
+
+SOCKET
+connectsock(const char *host, const char 
+    *service, const char *transport )
+
+{
+       struct hostent *phe; <font color="#000088">/* pointer to host </font>
+<font color="#000088">                           information entry */</font>
+
+       struct servent *pse; <font color="#000088">/* pointer to service </font>
+<font color="#000088">                            information entry */</font>
+
+       struct protoent *ppe; <font color="#000088">/* pointer to </font>
+<font color="#000088">                            protocol information </font>
+<font color="#000088">                            entry */</font>
+
+       struct sockaddr_in sin; <font color="#000088">/* an Internet </font>
+<font color="#000088">                            endpoint address */</font>
+
+       int s, type; <font color="#000088">/* socket descriptor and </font>
+<font color="#000088">                    socket type */</font>
+&nbsp;
+       memset(&amp;sin, 0, sizeof(sin));
+
+       sin.sin_family = AF_INET;</pre>
+				</td>
+				<td width="20" height="398"></td>
+				<td width="4" height="398"></td>
+				<td width="256" height="398" colspan="8" rowspan="1" valign="top" align="left" xpos="344" content csheight="283"><font color="#770000">This is the start of the connectsock function. Its arguments are the pointer to the remote host computer, the pointer to the service, and the pointer to the transport type.<br>
+					<br>
+					There are a number of data structures which hold the information used by the sockets protocol stack. These structures are used in both winsock and BSD Unix sockets. &quot;hostent&quot; refers to the &quot;host information entry&quot; and &quot;*phe&quot; is a pointer to the location in memory of the structure, namely the <u><b>P</b></u>ointer to <u><b>H</b></u>ost <u><b>E</b></u></font><font color="#770000">ntry. Similarly, *pse is the <u><b>P</b></u>ointer to <u><b>S</b></u>ervice <u><b>E</b></u></font><font color="#770000">ntry, &quot;ppe&quot; is the <u><b>P</b></u>ointer to <u><b>P</b></u>rotocol <u><b>E</b></u>ntry.<br>
+					<br>
+					If you are uncomfortable with the use of structures, it is important that you review them since structures are heavily used to contain the necessary information. These are standard structure types, defined by winsock (and by BSD Unix sockets).<br>
+					<br>
+					The AF_INET specifies the TCP/IP protocols and is the standard sin.sin_family that you will use.</font></td>
+				<td width="8" height="398"></td>
+				<td width="16" height="398"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="608" height="16" colspan="16" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="112">
+				<td width="1" height="112"><spacer type="block" width="1" height="112"></td>
+				<td width="16" height="112"></td>
+				<td width="464" height="112" colspan="9" rowspan="1" valign="top" align="left" xpos="16" content csheight="103">
+					<pre>/* Map service name to port number */
+
+       if ( pse = getservbyname(service,transport) )
+              sin.sin_port = htons(ntohs((u_short)pse-&gt;s_port)+100);
+       else if ( (sin.sin_port = htons((u_short)atoi(service))) == 0 )
+              errexit(&quot;can't get \&quot;%s\&quot; service entry\n&quot;, service);</pre>
+				</td>
+				<td width="16" height="112"></td>
+				<td width="68" height="112"></td>
+				<td width="20" height="112"></td>
+				<td width="8" height="112"></td>
+				<td width="8" height="112"></td>
+				<td width="8" height="112"></td>
+				<td width="16" height="112"></td>
+			</tr>
+			<tr height="672">
+				<td width="1" height="672"><spacer type="block" width="1" height="672"></td>
+				<td width="16" height="672"></td>
+				<td width="112" height="672"></td>
+				<td width="480" height="672" colspan="14" rowspan="1" valign="top" align="left" xpos="128" content csheight="667"><font color="#770000">The call above is similar to others that follow. I'll go through this one in some detail. Recall that &quot;*pse&quot; was the <u><b>P</b></u>ointer to the <u><b>S</b></u>ervice <u><b>E</b></u>ntry. The &quot;getservbyname&quot; function is part of the sockets protocol (you don't write it, it's standard) and returns the necessary pointer. The arguments are the service (daytime for this example) and transport (TCP for this example). If it returns successfully, then the structure entry is set to the numerical value of the service. The data structure used provides a mapping between service names and port numbers. For example, if the service is &quot;daytime,&quot; then the service's port number is &quot;13.&quot; In this example, you will see the functions &quot;htons&quot; and &quot;ntohs&quot;. These actions are to reconcile a possible conflict between the manner in which data is represented in different computers. The basic problem is referred to the &quot;little endian&quot; and &quot;big endian&quot; approaches. In particular, a multibyte number can be represented by a series of bytes but there is no universal standard on which byte (lowest order or highest order) comes first. In the case of &quot;little endian&quot; systems, the lowest order byte of an integer is stored in the lowest numbered memory address and higher order bytes are stored in higher numbered memory addresses. &quot;Big endian&quot; systems work just the opposite, storing the highest order byte in the lowest numbered memory locatin and the lowest order byte in the highest numbered memory location. <b>The Internet standard is to send the most significant byte first and the least significant byte last.</b> For consistency, your program will need to perform the appropriate transformation of data stored by your application to this internet standard.<br>
+					<br>
+					</font>
+					<ul>
+						<li><font color="#770000">To convert a short (2-byte) integer from network byte order to the local host byte order, you call the function &quot;ntohs&quot; (<u><b>N</b></u>etwork <u><b>TO</b></u> <u><b>H</b></u>ost <u><b>S</b></u>hort). If your local computer uses the &quot;little endian&quot; standard, then the socket protocols will convert from &quot;big endian&quot; to &quot;little endian&quot;. If your local computer uses the &quot;big endian&quot; standard, then the socket protocols will not leave the network received short integer unchanged.<br>
+						</font>
+						<li><font color="#770000">To convert a short (2-byte) integer from local host byte order to network byte order, you call the function &quot;htons&quot; (<u><b>H</b></u>ost <u><b>TO</b></u> <u><b>N</b></u>etwork <u><b>S</b></u>hort).<br>
+						<br>
+						</font>
+					</ul>
+					<p><font color="#770000">In the example above, the port number stored in the data structure is stored in the &quot;big endian&quot; format (network format) and is first converted to the format used by your computer using the &quot;ntohs&quot; function. Then, 100 is added to that number. Finally, the new number is converted back into the &quot;big endian&quot; format of the network using the &quot;htons&quot; function. This was necessary since the addition is performed by your computer and the integer must be in the correct format to perform the addition.<br>
+					<br>
+					In the &quot;else if&quot; part of the program segment above, the standard C-program function &quot;atoi&quot; is used. This converts a number represented by <u><b>A</b></u>SCII characters <u><b>TO</b></u> a binary <u><b>I</b></u>nteger. For example, if you entered the service in the main() program as the two ASCII characters &quot;1&quot; and &quot;3&quot; (i.e., as the two characters &quot;13&quot;, then the &quot;atoi&quot; converts &quot;13&quot; into the binary equivalent of the number (decimal) &quot;13.&quot;<br>
+					<br>
+					Summarizing the function performed by the program segment above,<br>
+					<br>
+					</font></p>
+					<ul>
+						<li><font color="#770000">In the &quot;if&quot; part of the statement, a name (&quot;daytime&quot;) has been given for the service and the instruction converts that name to the binary number corresponding to decimal 13 by looking up &quot;daytime&quot; in a table.<br>
+						<br>
+						</font>
+						<li><font color="#770000">In the &quot;else if&quot; part of the statement, a port number was entered using ASCII characters to represent the decimal number 13. The statement converts the characters to the equivalent binary number.<br>
+						<br>
+						</font>
+						<li><font color="#770000">In both cases, the final decimal value of the port number is represented in the &quot;big endian&quot; format used by the Internet.</font>
+					</ul>
+				</td>
+				<td width="16" height="672"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="608" height="16" colspan="16" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="112" height="16"></td>
+				<td width="64" height="16"></td>
+				<td width="48" height="16"></td>
+				<td width="80" height="16"></td>
+				<td width="20" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="40" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="80" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="128" height="128" colspan="6" rowspan="2" valign="top" align="left" xpos="496" content csheight="128"><font color="#770000">Here, the task is to name of the computer to the dotted decimal address notation used in the header for the IP address. The &quot;memcpy&quot; directly copies the dotted decimal address into the sin.sin_addr location</font>.</td>
+			</tr>
+			<tr height="112">
+				<td width="1" height="112"><spacer type="block" width="1" height="112"></td>
+				<td width="16" height="112"></td>
+				<td width="464" height="112" colspan="9" rowspan="1" valign="top" align="left" xpos="16" content csheight="96">
+					<pre>/* Map host name to IP address, allowing for dotted decimal */
+       if ( phe = gethostbyname(host) )
+              memcpy(&amp;sin.sin_addr, phe-&gt;h_addr, phe-&gt;h_length);
+       else if ( (sin.sin_addr.s_addr =inet_addr(host)) == INADDR_NONE)
+              errexit(&quot;can't get \&quot;%s\&quot; host entry\n&quot;, host);</pre>
+				</td>
+				<td width="16" height="112"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="608" height="16" colspan="16" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="80">
+				<td width="1" height="80"><spacer type="block" width="1" height="80"></td>
+				<td width="16" height="80"></td>
+				<td width="464" height="80" colspan="9" rowspan="1" valign="top" align="left" xpos="16" content csheight="55">/* Map protocol name to protocol number */
+					<pre>       if ( (ppe = getprotobyname(transport)) == 0)
+              errexit(&quot;can't get \&quot;%s\&quot; protocol entry\n&quot;,transport);</pre>
+				</td>
+				<td width="16" height="80"></td>
+				<td width="128" height="80" colspan="6" rowspan="1" valign="top" align="left" xpos="496" content csheight="67"><font color="#770000">Here, the protocol number associated with the given protocol name is obtained and stored in &quot;ppe&quot;. </font></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="608" height="16" colspan="16" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="96">
+				<td width="1" height="96"><spacer type="block" width="1" height="96"></td>
+				<td width="16" height="96"></td>
+				<td width="368" height="96" colspan="7" rowspan="1" valign="top" align="left" xpos="16" content csheight="67">
+					<pre>/* Use protocol to choose a socket type */
+       if (strcmp(transport, &quot;udp&quot;) == 0)
+              type = SOCK_DGRAM;
+       else
+              type = SOCK_STREAM;</pre>
+				</td>
+				<td width="16" height="96"></td>
+				<td width="224" height="96" colspan="8" rowspan="1" valign="top" align="left" xpos="400" content csheight="91"><font color="#770000">The socket type is set to either connected sockets (SOCK_STREAM for repeated exchanges of streams of data, generally requiring multiple datagrams for each stream, using TCP) or unconnected sockets (SOCK_DGRAM for the transmission of a single Internet frame/datagram using UDP).</font></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="608" height="16" colspan="16" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="176">
+				<td width="1" height="176"><spacer type="block" width="1" height="176"></td>
+				<td width="16" height="176"></td>
+				<td width="464" height="176" colspan="9" rowspan="1" valign="top" align="left" xpos="16" content csheight="151">/* Allocate a socket */
+					<pre>       s = socket(PF_INET, type, ppe-&gt;p_proto);
+       if (s == INVALID_SOCKET)
+              errexit(&quot;can't create socket: %d\n&quot;, GetLastError());
+
+/* Connect the socket */
+       if (connect(s, (struct sockaddr *)&amp;sin, sizeof(sin)) == SOCKET_ERROR)
+              errexit(&quot;can't connect to %s.%s: %d\n&quot;, host, service,  
+              GetLastError());
+       return s;
+}</pre>
+				</td>
+				<td width="16" height="176"></td>
+				<td width="68" height="176"></td>
+				<td width="20" height="176"></td>
+				<td width="8" height="176"></td>
+				<td width="8" height="176"></td>
+				<td width="8" height="176"></td>
+				<td width="16" height="176"></td>
+			</tr>
+			<tr height="115">
+				<td width="1" height="115"><spacer type="block" width="1" height="115"></td>
+				<td width="16" height="115"></td>
+				<td width="112" height="115"></td>
+				<td width="64" height="115"></td>
+				<td width="432" height="115" colspan="14" rowspan="1" valign="top" align="left" xpos="192" content csheight="115"><font color="#770000">The end of the &quot;consock&quot; code now allocates a socket for the connection using the &quot;socket&quot; function specified by the sockets protocol (winsock and BSD Unix). On calling the &quot;socket&quot; function, the information assembled earlier is passed to the socket call.<br>
+					<br>
+					Once the socket has been allocated at your computer's connection, you then connect to the remote computer's port (socket).<br>
+					<br>
+					You are now connected to the remote computer and transactions (as in DT Client) can proceed.</font></td>
+			</tr>
+		</table>
+		</font>
+	</body>
+
+</html>

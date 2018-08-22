@@ -1,0 +1,345 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>/* TCPdtc</title>
+		<meta name="Generator" content="Microsoft Word 73.1">
+	</head>
+
+	<body>
+		<font face="Times">
+		<table cool width="617" height="2184" border="0" cellpadding="0" cellspacing="0" gridx="16" showgridx usegridx gridy="16" showgridy usegridy>
+			<tr height="1" cntrlrow>
+				<td width="1" height="1"></td>
+				<td width="16" height="1"><spacer type="block" width="16" height="1"></td>
+				<td width="224" height="1"><spacer type="block" width="224" height="1"></td>
+				<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+				<td width="4" height="1"><spacer type="block" width="4" height="1"></td>
+				<td width="12" height="1"><spacer type="block" width="12" height="1"></td>
+				<td width="4" height="1"><spacer type="block" width="4" height="1"></td>
+				<td width="220" height="1"><spacer type="block" width="220" height="1"></td>
+				<td width="20" height="1"><spacer type="block" width="20" height="1"></td>
+				<td width="12" height="1"><spacer type="block" width="12" height="1"></td>
+				<td width="4" height="1"><spacer type="block" width="4" height="1"></td>
+				<td width="20" height="1"><spacer type="block" width="20" height="1"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="224" height="16"></td>
+				<td width="80" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="12" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="220" height="16"></td>
+				<td width="20" height="16"></td>
+				<td width="12" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="20" height="16"></td>
+			</tr>
+			<tr height="144">
+				<td width="1" height="144"><spacer type="block" width="1" height="144"></td>
+				<td width="16" height="144"></td>
+				<td width="576" height="144" colspan="8" rowspan="1" valign="top" align="left" xpos="16" content csheight="128">
+					<center>
+						<font color="#770000" size="5">Summary of Daytime Client's Main Program (C++)</font></center>
+					<div align="left">
+						<p>This program component includes the main() program along with a program designed to perform the read and write operations associated with this particular application. I have interspersed comments with the program listing, and in some cases used pseudocode rather than correct code, to summarize the basic operation of the program. A downloadable version of the &quot;uncontaminated&quot; source code is available elsewhere on this site.<br>
+						<br>
+						The component called TCPdtc.cpp contains the &quot;main&quot; program and a function &quot;TCPdaytime&quot;. The suffix &quot;.cpp&quot; stands for C++ and is the extension of the Visual C++ files you will be using.</div>
+				</td>
+				<td width="4" height="144"></td>
+				<td width="20" height="144"></td>
+			</tr>
+			<tr height="32">
+				<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				<td width="16" height="32"></td>
+				<td width="224" height="32" colspan="1" rowspan="1" valign="top" align="left" xpos="16" content csheight="32">
+					<center>
+						<b><font color="#000077">PROGRAM LISTING  </font></b></center>
+				</td>
+				<td width="80" height="32"></td>
+				<td width="4" height="32"></td>
+				<td width="12" height="32"></td>
+				<td width="224" height="32" colspan="2" rowspan="1" valign="top" align="left" xpos="336" content csheight="32">
+					<center>
+						<font color="#550000"><b>COMMENTS ON PROGRAM</b></font><b><font color="#000077">  </font></b></center>
+				</td>
+				<td width="20" height="32"></td>
+				<td width="12" height="32"></td>
+				<td width="4" height="32"></td>
+				<td width="20" height="32"></td>
+			</tr>
+			<tr height="32">
+				<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				<td width="16" height="32"></td>
+				<td width="564" height="32" colspan="7" rowspan="1" valign="top" align="left" xpos="16">
+					<hr size="2" width="560">
+				</td>
+				<td width="12" height="32"></td>
+				<td width="4" height="32"></td>
+				<td width="20" height="32"></td>
+			</tr>
+			<tr height="88">
+				<td width="1" height="88"><spacer type="block" width="1" height="88"></td>
+				<td width="16" height="88"></td>
+				<td width="304" height="88" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="87">/* TCPdtc.cpp - main, TCPdaytime */
+					<pre>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;winsock.h&gt;</pre>
+				</td>
+				<td width="4" height="88"></td>
+				<td width="12" height="88"></td>
+				<td width="4" height="88"></td>
+				<td width="240" height="88" colspan="2" rowspan="1" valign="top" align="left" xpos="340" content csheight="79"><font color="#770000">The #include statements provide the standard C++ library, the standard i/o package, and the winsock protocol for TCP/IP applications. You can also use the more recent version of winsock.h, called winsock2.h.</font></td>
+				<td width="12" height="88"></td>
+				<td width="4" height="88"></td>
+				<td width="20" height="88"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="564" height="16" colspan="7" rowspan="1" valign="top" align="left" xpos="16">
+					<hr size="2" width="560">
+				</td>
+				<td width="12" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="20" height="16"></td>
+			</tr>
+			<tr height="84">
+				<td width="1" height="84"><spacer type="block" width="1" height="84"></td>
+				<td width="16" height="84"></td>
+				<td width="304" height="84" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="75">void TCPdaytime(const char *, const char *);
+					<pre>void errexit(const char *, ...);
+SOCKET connectTCP(const char *, const char *);</pre>
+				</td>
+				<td width="4" height="84"></td>
+				<td width="12" height="84"></td>
+				<td width="4" height="84"></td>
+				<td width="256" height="84" colspan="4" rowspan="1" valign="top" align="left" xpos="340" content csheight="64"><font color="#770000">These are the function declarations that are used in this program. connectTCP and errexit are functions given in other components. TCPdaytime is the function given after the main() program below.</font></td>
+				<td width="20" height="84"></td>
+			</tr>
+			<tr height="15">
+				<td width="1" height="15"><spacer type="block" width="1" height="15"></td>
+				<td width="16" height="15"></td>
+				<td width="576" height="15" colspan="8" rowspan="1" valign="top" align="left" xpos="16">
+					<hr size="2" width="576">
+				</td>
+				<td width="4" height="15"></td>
+				<td width="20" height="15"></td>
+			</tr>
+			<tr height="1">
+				<td width="1" height="1"><spacer type="block" width="1" height="1"></td>
+				<td width="16" height="1"></td>
+				<td width="224" height="1"></td>
+				<td width="80" height="1"></td>
+				<td width="4" height="1"></td>
+				<td width="12" height="1"></td>
+				<td width="4" height="1"></td>
+				<td width="240" height="65" colspan="2" rowspan="2" valign="top" align="left" xpos="340" content csheight="65"><font color="#770000">The #define statements say that &quot;LINELEN&quot; will be replaced by 128 when &quot;LINELEN&quot; appears in the program. &quot;WSVERS&quot; will be replaced by MAKEWORK(2,0).</font></td>
+				<td width="12" height="1"></td>
+				<td width="4" height="1"></td>
+				<td width="20" height="1"></td>
+			</tr>
+			<tr height="64">
+				<td width="1" height="64"><spacer type="block" width="1" height="64"></td>
+				<td width="16" height="64"></td>
+				<td width="304" height="64" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="63">#define LINELEN 128
+					<pre>#define WSVERS MAKEWORD(2, 0)</pre>
+				</td>
+				<td width="4" height="64"></td>
+				<td width="12" height="64"></td>
+				<td width="4" height="64"></td>
+				<td width="12" height="64"></td>
+				<td width="4" height="64"></td>
+				<td width="20" height="64"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="600" height="16" colspan="10" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="400">
+				<td width="1" height="400"><spacer type="block" width="1" height="400"></td>
+				<td width="16" height="400"></td>
+				<td width="304" height="400" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="211">/*-------------------------------------------
+					<pre>* main - TCP client for DAYTIME service
+*--------------------------------------------
+*/
+
+int
+main(int argc, char *argv[])
+{
+     char *host = &quot;localhost&quot;; 
+       /* host to use if none supplied */
+     char *service = &quot;daytime&quot;; 
+       /* default service port */
+
+     WSADATA wsadata;</pre>
+				</td>
+				<td width="4" height="400"></td>
+				<td width="12" height="400"></td>
+				<td width="4" height="400"></td>
+				<td width="256" height="400" colspan="4" rowspan="1" valign="top" align="left" xpos="340" content csheight="384"><font color="#770000">This is the start of the main() program, which is the starting point at which the overall program runs.<br>
+					<br>
+					char *host = &quot;localhost&quot; uses the pointer *host pointing to the memory location where the variable &quot;host&quot; appears. The contents of those memory locations are declared as ASCII characters. This allows the host (e.g. ibm.com) to be given using the site's name, rather than IP address in dot-decimal notation (xxx.xxx.xxx.xxx). Similarly, the variable &quot;service&quot; (daytime, ftp, etc) is defined using a pointer to the memory location with those memory locations containing ASCII characters.<br>
+					<br>
+					WSADATA is a data type defined in the winsock protocol. wsadata is declared as a variable of type WSADATA.<br>
+					<br>
+					The notation main(int argc, char *argv[]) allows arguments to be included on the line when the program is run. If the program is called &quot;myproj&quot;, then you would execute the program from DOS using, for example,<br>
+					<br>
+					myproj columbia.edu daytime<br>
+					<br>
+					where &quot;columbia.edu&quot; will be argv[1] and &quot;daytime&quot; will be argv[2]. argc is an integer, in this case equal to 3 (argv[0] contains additional information which you can determine by printing out argv[0]). </font></td>
+				<td width="20" height="400"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="600" height="16" colspan="10" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="240">
+				<td width="1" height="240"><spacer type="block" width="1" height="240"></td>
+				<td width="16" height="240"></td>
+				<td width="304" height="240" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="219">switch (argc) {
+					<pre>     case 1:
+          host = &quot;localhost&quot;;
+               break;
+     case 3:
+          service = argv[2];
+          /* FALL THROUGH */
+     case 2:
+          host = argv[1];
+               break;
+     default:
+          fprintf(stderr, &quot;usage: TCPdaytime   
+[host [port]]\n&quot;);
+          exit(1);
+     }</pre>
+				</td>
+				<td width="4" height="240"></td>
+				<td width="12" height="240"></td>
+				<td width="4" height="240"></td>
+				<td width="256" height="240" colspan="4" rowspan="1" valign="top" align="left" xpos="340" content csheight="224"><font color="#770000">This switch statement determines how much you said when you called the program. The cases depend on the value of argc. If argc = 1, then you called the program without arguments (e.g., said &quot;myproj&quot; only. If argc = 2, then you included only one argument, which will be taken as the host computer to be used (e.g., &quot;myproj purdue.edu&quot;). If argc = 3, then you specified both the host and the service (e.g., &quot;myproj purdue.edu daytime&quot;). The &quot;break&quot; command causes the execution to jump to the end of the switch statement. If argc = 3, then both the case 3 and the case 2 statements are executed (as indicated by the &quot;Fall Through&quot; comment. If argc is not 1, 2, or 3, then the default command at the end is executed. When running the program, you can play with this to see whether you can cause the default command to be executed.</font></td>
+				<td width="20" height="240"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="600" height="16" colspan="10" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600">
+				</td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="224" height="16"></td>
+				<td width="80" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="12" height="16"></td>
+				<td width="4" height="16"></td>
+				<td width="256" height="292" colspan="4" rowspan="2" valign="top" align="left" xpos="340" content csheight="272"><font color="#770000">The WSAStartup command is required for Windows use of winsock. It is provided as part of the winsock environment (you don't write it). If the return value on calling WSAStartup is zero, then the call was successful and you are ready to begin running TCP/IP programs. If not, then the program exits by calling the &quot;errexit&quot; function with the user notification &quot;WSAStartup failed&quot;. The &quot;\n&quot; inserts a carriage return and line feed in output printed to your screen.<br>
+					<br>
+					If the WSAStartup command was successful, then the function &quot;TCPdaytime&quot; is called with &quot;host&quot; and &quot;service&quot; having been defined as discussed above. The TCPdaytime program will be calling other functions to set up the connection to the remote host and will manage the data exchanged between your computer and that remote host. On exiting TCPdaytime, your client-server interactions have been completed and WSACleanup() terminates activities associated with the winsock protocols.</font></td>
+				<td width="20" height="16"></td>
+			</tr>
+			<tr height="276">
+				<td width="1" height="276"><spacer type="block" width="1" height="276"></td>
+				<td width="16" height="276"></td>
+				<td width="304" height="276" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="211">if (WSAStartup(WSVERS, &amp;wsadata) != 0)
+					<pre>          errexit(&quot;WSAStartup failed\n&quot;);
+
+     TCPdaytime(host, service);
+
+     WSACleanup();
+
+     return 0; /* exit */
+}</pre>
+				</td>
+				<td width="4" height="276"></td>
+				<td width="12" height="276"></td>
+				<td width="4" height="276"></td>
+				<td width="20" height="276"></td>
+			</tr>
+			<tr height="16">
+				<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				<td width="16" height="16"></td>
+				<td width="600" height="16" colspan="10" rowspan="1" valign="top" align="left" xpos="16">
+					<hr width="600" noshade>
+				</td>
+			</tr>
+			<tr height="352">
+				<td width="1" height="352"><spacer type="block" width="1" height="352"></td>
+				<td width="16" height="352"></td>
+				<td width="308" height="352" colspan="3" rowspan="1" valign="top" align="left" xpos="16" content csheight="343">/*------------------------------------------------------------* TCPdaytime - invoke Daytime on specified host, print results
+					<p>*-------------------------------------------------------------</p>
+					<pre>*/
+
+void
+TCPdaytime(const char *host, const char *service)
+{
+     char buf[LINELEN+1]; /* buffer for one line  
+                          of text */
+     SOCKET s; /* socket descriptor */
+     int cc;
+
+     s = connectTCP(host, service);
+     cc = recv(s, buf, LINELEN, 0);
+
+     while( cc != SOCKET_ERROR &amp;&amp; cc &gt; 0) {
+          buf[cc] = '\0'; /* ensure null-
+                          termination */
+          (void) fputs(buf, stdout);
+          cc = recv(s, buf, LINELEN, 0);
+     }
+
+     closesocket(s);
+<font face="Times">}</font></pre>
+				</td>
+				<td width="12" height="352"></td>
+				<td width="256" height="695" colspan="4" rowspan="2" valign="top" align="left" xpos="336" content csheight="523"><font color="#770000">This is the application specific function implementing the daytime program. The main program above is generic and can be used for any TCP/IP program with two arguments.<br>
+					<br>
+					To handle the receipt of the data containing the date and time, the variable &quot;buf&quot; of type &quot;char&quot; (character) is declared. LINELEN was defined (=128 characters) using a #define statement at the start of the program listing above, before the start of main(). The variable &quot;s&quot; is declared as being of type &quot;SOCKET&quot;, this data type being defined by winsock.h. The variable &quot;cc&quot; is declared as an integer.<br>
+					<br>
+					The function &quot;connectTCP&quot; is given by another component used for this application and discussed there. It returns the socket descriptor for the host called and the service specified. This is a local definition of a socket (a number identifying this particular running application - more than one can be operating at the same time.<br>
+					<br>
+					The &quot;recv&quot; function is a standard call provided by the winsock protocol allowing the program to receive data from a connected socket at the host computer. It receives data from socket &quot;s&quot; into buffer &quot;buf&quot; of length LINELEN, with the flags set to zero. Other values of the flags allow your program to control the reception in various ways.<br>
+					<br>
+					The program enters a loop that will receive one line at a time from the remote host. So long as there is no error, it simply prints the contents of &quot;buf&quot; loaded by recv to the standard output (terminal) and then looks for another line of input. This continues until the last line of input is received (designated by the message termination value cc = all zeros).<br>
+					<br>
+					When the last line has been received, the program closes the socket and exits (with control returning to the main program which formally closes everything by calling WASCleanup.</font></td>
+				<td width="4" height="352"></td>
+				<td width="20" height="352"></td>
+			</tr>
+			<tr height="343">
+				<td width="1" height="343"><spacer type="block" width="1" height="343"></td>
+				<td width="16" height="343"></td>
+				<td width="304" height="343" colspan="2" rowspan="1" valign="top" align="left" xpos="16" content csheight="343"><font color="#000077"><b>NOTE:</b></font><font color="#000077"> If you are interested in writing a different application, then, for the simple program being discussed here, you would need to write something different to arrange for the exchange of messages. The daytime program connects to port 13 of the remote computer and the response is simply to return the daytime (date and time) and close the connection. Most applications will be more complex than this, with multiple messages being sent to the remote host and the remote host responding with a variety of messages.<br>
+					<br>
+					If you want to write something to the remote computer, the command used depends on whether a connected (TCP) or unconnected (UDP) connection is being used. For connected sockets, you can use the command<br>
+					<br>
+					&quot;send(socket, message, length, flags)&quot;<br>
+					<br>
+					which is analogous to the<br>
+					<br>
+					&quot;recv(socket, message, length, flags)&quot;<br>
+					<br>
+					used above.<br>
+					<br>
+					If using unconnected sockets (UDP), then you will need to specify the destination address along with the message. One call you can use for unconnected sockets is<br>
+					<br>
+					&quot;sendto(socket, message, length, flags, destaddr, addrlen)&quot;.</font></td>
+				<td width="4" height="343"></td>
+				<td width="12" height="343"></td>
+				<td width="4" height="343"></td>
+				<td width="20" height="343"></td>
+			</tr>
+		</table>
+		</font>
+	</body>
+
+</html>

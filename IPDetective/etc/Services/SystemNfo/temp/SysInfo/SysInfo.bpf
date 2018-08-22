@@ -1,0 +1,12 @@
+USEUNIT("CpuStats.cpp");
+USEUNIT("DriveInfo.cpp");
+USEUNIT("DriveStats.cpp");
+USEUNIT("MemoryInfo.cpp");
+USEUNIT("OSInfo.cpp");
+USEUNIT("RegisterValues.cpp");
+USEUNIT("SocketInfo.cpp");
+USEUNIT("SysInfo.cpp");
+USEUNIT("SysUtils.cpp");
+USEUNIT("CpuInfo.cpp");
+//---------------------------------------------------------------------------
+#define Library

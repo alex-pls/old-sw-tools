@@ -1,0 +1,9 @@
+USEUNIT("sysinfo.cpp");
+USERES("sysinfo.res");
+USEUNIT("hardware.cpp");
+USEUNIT("network.cpp");
+USEUNIT("software.cpp");
+//---------------------------------------------------------------------------
+This file is used by the project manager only and should be treated like the project file
+
+DllEntryPoint

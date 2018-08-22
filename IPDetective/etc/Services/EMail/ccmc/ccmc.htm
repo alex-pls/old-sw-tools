@@ -1,0 +1,395 @@
+<html>
+
+<head>
+<title>CCMC v1.02</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<p align="left"><font face="Arial"><strong><big><big><big><big><img border="0" src="ccmc.gif" width="39" height="40">
+</big></big></big></big><big><big><big><big>CCMC</big></big></big></big><big>
+ <big>
+<big>
+<big>v1.02</big></big></big></big></strong></font></p>
+
+<p><font face="Arial">Welcome to <strong>CCMC</strong>, 2 simple classes to
+encapsulate sending mail using the Common Messaging Calls (CMC) interface.</font></p>
+
+<p><font face="Arial">CMC is a platform independent API which provides messaging
+capabilities similar to simple MAPI on Windows. Other obvious API's of use to
+the MFC programmer are SMTP and Simple MAPI. The author has provided freeware classes
+for these at <a href="http://www.naughter.com/smtp.html">http://www.naughter.com/smtp.html</a>
+and <a href="http://www.naughter.com/cmapi.html">http://www.naughter.com/cmapi.html</a>
+respectively.
+This class has been exclusively tested with the MS reference implementation of
+CMC but should work ok with any other CMC implementation on Windows 9x, NT and 2000.</font></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<table>
+  <tr>
+    <td><font face="Arial"><a href="#Features">Features</a></font></td>
+  </tr>
+  <tr>
+    <td><font face="Arial"><a href="#Usage">Usage</a></font></td>
+  </tr>
+  <tr>
+    <td><font face="Arial"><a href="#History">History</a></font></td>
+  </tr>
+  <tr>
+    <td><font face="Arial"><a href="#APIReference">API Reference</a></font></td>
+  </tr>
+  <tr>
+    <td><font face="Arial"><a href="#Enhancements">Planned Enhancements</a></font></td>
+  </tr>
+  <tr>
+    <td><font face="Arial"><a href="#Contact">Contacting the Author</a></font></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="Features"></a><big><strong><big>Features</big></strong></big>
+</font>
+
+<ul>
+  <li><font color="#000000" size="3" face="Arial">Simple and clean C++ interface.</font></li>
+  <li><font color="#000000" size="3" face="Arial">All the code is UNICODE
+    compliant and build configurations are provided for this. Even though CMC only exports an ASCII versions of it's functions, the class internally
+    performs the necessary conversions.</font></li>
+  <li><font color="#000000" size="3" face="Arial">The code can be used in a console
+    application or without bringing up any UI dialogs if so desired.</font></li>
+  <li><font color="#000000" size="3" face="Arial">The code gracefully handles
+    the case where CMC is not installed on client machines. Internally the
+    class loads the DLL and uses GetProcAddress calls.</font></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><a name="Usage"></a><font face="Arial"><big><big><strong>Usage</strong></big></big></font>
+
+<ul>
+  <li><font color="#000000" size="3" face="Arial">To use the class in your code simply include
+    CCmc.cpp in your project and #include CCmc.h in which ever of your modules needs to
+    make calls to the classes.</font></li>
+  <li><font face="Arial">Your code will need to include MFC either statically or dynamically.</font></li>
+  <li><font face="Arial">You may want to add xcmc.h to your pre compiled header
+    to improve compilation speed. An build message will inform you of this.</font></li>
+  <li><font face="Arial">To see the class in action, have a look at the code in InitInstance
+    in the module &quot;app.cpp&quot;.</font></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><big><a name="History"></a></big><font color="#000000" size="5" face="Arial"><strong>History</strong></font></p>
+
+<p><strong><font color="#000000" size="3" face="Arial">V1.0 (25th November 199</font><font color="#000000" size="3" face="Arial">9)</font></strong> 
+
+<ul>
+  <li><font color="#000000" size="3" face="Arial">Initial public release.</font></li>
+</ul>
+
+<p><strong><font color="#000000" size="3" face="Arial">V1.01 (28 March 2000)</font></strong>
+<ul>
+  <li><font face="Arial">Provision of a sample app which implements a mini mail
+    sender.</font></li>
+  <li><font face="Arial">Added a CCMCMessage::AddMultipleRecipients method
+    similar to my SMTP class.</font></li>
+</ul>
+
+<p><strong><font color="#000000" size="3" face="Arial">V1.02 (2 April 2000)</font></strong>
+<ul>
+  <li><font face="Arial">Password field in the configuration dialog now uses
+    ES_PASSWORD edit control style.</font></li>
+  <li><font face="Arial">Password value used for CMC logon is now stored in the
+    registry encrypted instead of as plain text.</font></li>
+</ul>
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p class="crt"><font face="Arial"><a name="APIReference"></a><big><big><strong>API
+Reference</strong></big></big></font></p>
+
+<p><font face="Arial">The API consists of the following 2 classes and their methods and
+variables</font></p>
+
+<p>&nbsp;</p>
+
+<p><strong><font face="Arial">CCMC</font></strong><strong><font face="Arial">Message</font></strong></p>
+
+<p align="left"><strong><font face="Arial"><a href="#m_To">CCMC</a></font></strong><strong><font face="Arial"><a href="#m_To">Message</a></font></strong><strong><font face="Arial"><a href="#m_To">::m_To</a><br>
+<a href="#m_CC">CCMC</a><a href="#m_CC">Message::m_CC</a><br>
+<a href="#m_BCC">CCMC</a><a href="#m_BCC">Message::m_BCC</a><br>
+<a href="#m_sSubject">CCMC</a><a href="#m_sSubject">Message::m_sSubject</a><br>
+<a href="#m_sBody">CCMC</a><a href="#m_sBody">Message::m_sBody</a><br>
+<a href="#m_Attachments">CCMC</a><a href="#m_Attachments">Message::m_Attachments</a><br>
+<a href="#m_AttachmentTitles">CCMC</a><a href="#m_AttachmentTitles">Message::m_AttachmentTitles</a></font></strong></p>
+
+<p>&nbsp;</p>
+
+<p><strong><font face="Arial">CCMC</font></strong><strong><font face="Arial">Session</font></strong></p>
+
+<p><strong><font face="Arial"><a href="#CMapiSession">CCMC</a></font></strong><strong><font face="Arial"><a href="#CMapiSession">Session</a></font></strong><strong><font face="Arial"><a href="#CMapiSession">::CCMCSession</a><br>
+<a href="#~CMapiSession">CCMC</a><a href="#~CMapiSession">Session::~CCMCSession</a><br>
+<a href="#Logon">CCMC</a><a href="#Logon">Session::Logon</a><br>
+<a href="#LoggedOn">CCMC</a><a href="#LoggedOn">Session::LoggedOn</a><br>
+<a href="#Logoff">CCMC</a><a href="#Logoff">Session::Logoff</a><br>
+<a href="#Send">CCMC</a><a href="#Send">Session::Send</a><br>
+<a href="#MapiInstalled">CCMC</a><a href="#CMCInstalled">Session::CMCInstalled</a><br>
+<a href="#GetLastError">CCMC</a><a href="#GetLastError">Session::GetLastError</a></font></strong></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_To"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_To</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_To is of type CStringArray and contains the array of
+recipients which the email is to be mailed to. The name of each recipient can be a
+friendly name (the friendly name is the name which a recipient with an address book
+entry is known as e.g. <i>&quot;PJ at Work&quot;</i>  which could map to using an SMTP&nbsp;
+transport to send to <i>pj.naughter@softech-telecom.com</i>)
+or it can be a specific transport address e.g. pjna@naughter.com.</font></p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_CC"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_CC</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_CC is of type CStringArray and contains the array of
+recipients which the email will be Carbon Copied&nbsp; to.&nbsp; The way
+addresses are specified is the same as for m_To.</font></p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_BCC"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_BCC</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_BCC is of type CStringArray and contains the array of
+recipients which the email will be Blind Carbon Copied&nbsp; to.&nbsp; The way
+addresses are specified is the same as for m_To.</font></p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_sSubject"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_sSubject</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_sSubject is of type CString and is the subject line of
+the email.</font></p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_sBody"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_sBody</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_sBody is of type CString and is the body of the email.</font></p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_Attachments"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_Attachments</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_Attachments is of type CStringArray and is a list of
+filenames to be included as attachments in the email.</font></p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="m_AttachmentTitles"></a><big><strong>CCMC</strong></big><big><strong>Message</strong></big><strong><big>::m_AttachmentTitles</big></strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">m_AttachmentTitles is of type CStringArray and contains
+the titles of what each file attachment will be known as to recipients of this
+message. If you leave this array empty then the title will be the same as the
+filename. As an example have a look at the code in InitInstance in app.cpp to
+see how the <i>&quot;autoexec.bat&quot;</i> attachment has a title of <i>&quot;my autoexec.bat&quot;.</i></font></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><a name="CMapiSession"></a><big><font face="Arial"><strong>CCMC</strong></font></big><big><font face="Arial"><strong>Session</strong></font></big><font face="Arial"><strong><big>::</big><big>CCMC</big><big>Session</big></strong></font></p>
+
+<p><font face="Arial"><strong>CCMC</strong></font><font face="Arial"><strong>Session</strong></font><font face="Arial"><strong>();</strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Standard constructor for the class. This class is the main
+CMC
+support class and contains the functions to actually send the mail message.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="~CMapiSession"></a><big><font face="Arial"><strong>CCMC</strong></font></big><big><font face="Arial"><strong>Session</strong></font></big><font face="Arial"><strong><big>::~</big><big>CCMC</big><big>Session</big></strong></font></p>
+
+<p><font face="Arial"><strong>CCMC</strong></font><font face="Arial"><strong>Session</strong></font><font face="Arial"><strong>();</strong></font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Standard destructor for the class. Internally this logs
+you out of CMC if you're logged in and unloads the CMC dll.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="Logon"></a><big><font face="Arial"><strong>CCMC</strong></font></big><big><font face="Arial"><strong>Session</strong></font></big><font face="Arial"><strong><big>::Logon</big></strong></font></p>
+
+<p><font face="Arial"><strong>BOOL Logon(const CString&amp; </strong>sProfileName<strong>,
+const CString&amp; </strong>sPassword<strong> = CString(), CWnd* </strong>pParentWnd<strong>
+= NULL);</strong></font></p>
+
+<p class="rl"><strong><font face="Arial">Return Value</font></strong></p>
+
+<p class="t"><font face="Arial">TRUE if you were successfully logged in to CMC otherwise FALSE</font></p>
+
+<p><font face="Arial"><strong>Parameters</strong></font></p>
+
+<p><font face="Arial"><em>sProfileName</em> CMC profile name to use to logon.</font></p>
+
+<p><font face="Arial"><em>sPassword</em> sPassword associated with the profile
+(if any).</font></p>
+
+<p><font face="Arial"><em>pParentWnd</em> The parent window indicating that if a
+dialog box is displayed, it is modal with respect to.</font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Logons to the CMC messaging system creating a session
+with it. If you pass an empty profile name then Logon will try to
+interactively logon by presenting the normal CMC logon dialog.
+Specifying NULL as the parent window as is the default will use the window as
+returned by AfxGetMainWnd(). Please note that you must be logged on to CMC prior to sending a message. Internally the code will <i>&quot;ASSERT&quot;</i>
+to ensure you do not forget to do this.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="LoggedOn"></a><big><strong><font face="Arial">CCMC</font></strong></big><big><strong><font face="Arial">Session</font></strong></big><strong><font face="Arial"><big>::LoggedOn</big></font></strong></p>
+
+<p><strong><font face="Arial">BOOL LoggedOn() const;</font></strong></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Simply accessor which returns TRUE if this instance is
+logged on to CMC otherwise FALSE.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="Logoff"></a><big><font face="Arial"><strong>CCMC</strong></font></big><big><font face="Arial"><strong>Session</strong></font></big><font face="Arial"><strong><big>::Logoff</big></strong></font></p>
+
+<p><font face="Arial"><strong>BOOL Logon();</strong></font></p>
+
+<p class="rl"><strong><font face="Arial">Return Value</font></strong></p>
+
+<p class="t"><font face="Arial"> TRUE if you were successfully logged off from
+CMC otherwise FALSE</font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">The corollary function to Logon. Internally this function
+is called in the CCMCSession destructor.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="Send"></a><big><font face="Arial"><strong>CCMC</strong></font></big><big><font face="Arial"><strong>Session</strong></font></big><font face="Arial"><strong><big>::Send</big></strong></font></p>
+
+<p><font face="Arial"><strong>BOOL Send(CCMCMessage&amp; </strong>message<strong>);</strong></font></p>
+
+<p class="rl"><strong><font face="Arial">Return Value</font></strong></p>
+
+<p class="t"><font face="Arial"> TRUE if the message was successfully sent
+otherwise FALSE.</font></p>
+
+<p><font face="Arial"><strong>Parameters</strong></font></p>
+
+<p><font face="Arial"><em>message</em> Message to be sent</font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Sends the message as specified in the &quot;message&quot;
+parameter, using the CMC profile currently logged into.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="CMCInstalled"></a><big><strong><font face="Arial">CCMC</font></strong></big><big><strong><font face="Arial">Session</font></strong></big><strong><font face="Arial"><big>::CMCInstalled</big></font></strong></p>
+
+<p><strong><font face="Arial">BOOL CMCInstalled() const;</font></strong></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Simply accessor which returns TRUE if CMC is installed
+and has been correctly initialized ready for this instance to use. The actual
+loading of the CMC dll is handled internally by the CCMCSession constructor,
+meaning it is valid this function anytime after you have constructed a CCMCSession
+instance.</font></p>
+
+<p>&nbsp;</p>
+
+<p><a name="GetLastError"></a><big><strong><font face="Arial">CCMC</font></strong></big><big><strong><font face="Arial">Session</font></strong></big><big><strong><font face="Arial">::GetLastError</font></strong></big></p>
+
+<p><strong><font face="Arial">CMC_return_code</font></strong><strong><font face="Arial">
+GetLastError() const;</font></strong></p>
+
+<p class="rl"><strong><font face="Arial">Return Value</font></strong></p>
+
+<p class="t"><font face="Arial">The last CMC error generated by this CCMCSession
+instance.</font></p>
+
+<p><font face="Arial"><strong>Remarks</strong></font></p>
+
+<p><font face="Arial">Since the class uses CMC which has its own way of reporting errors
+different to the standard Win32 way (GetLastError), this method allows this
+value to be retrieved. CMC errors are documented in the xcmc.h file in your VC
+include directory.</font></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><big><a name="Enhancements"></a></big><font color="#000000" size="4"><strong>PLANNED
+ENHANCEMENTS</strong></font> </font>
+
+<ul>
+  <li><font face="Arial">Package the code up into an OCX, COM Interface or DLL to allow non
+    MFC apps to use the code.</font></li>
+  <li><font color="#000000" size="3" face="Arial">If you have any other suggested
+    improvements, please let me know so that I can incorporate them into the next release.</font></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial"><a name="Contact"></a><font color="#000000" size="4"><strong>CONTACTING
+THE AUTHOR</strong></font></font></p>
+
+<p><font color="#000000" size="3" face="Arial">PJ Naughter<br>
+Email: <a href="mailto:pjna@naughter.com">pjna@naughter.com</a><br>
+Web: <a href="http://www.naughter.com">http://www.naughter.com</a><br>
+12 April 2000</font></p>
+</body>
+</html>

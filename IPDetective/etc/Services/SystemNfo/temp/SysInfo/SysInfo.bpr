@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="Release\SysInfo.lib"/>
+    <OBJFILES value="Release\CpuStats.obj Release\DriveInfo.obj Release\DriveStats.obj 
+      Release\MemoryInfo.obj Release\OSInfo.obj Release\RegisterValues.obj 
+      Release\SocketInfo.obj Release\SysInfo.obj Release\SysUtils.obj 
+      Release\CpuInfo.obj"/>
+    <RESFILES value=""/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value=""/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="TLib"/>
+    <USERDEFINES value="WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;SYSINFO_EXPORTS"/>
+    <SYSDEFINES value="_MSC_VER=1100;_NO_VCL;_ASSERTE;NO_STRICT"/>
+    <MAINSOURCE value="SysInfo.bpf"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\mfc;$(BCB)\include\atl"/>
+    <LIBPATH value="$(BCB)\lib;$(RELEASELIBPATH);$(BCB)\lib\psdk"/>
+    <WARNINGS value="-w-8026 -w-8027 -w-par"/>
+    <LISTFILE value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-src_suffix cpp -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D_USRDLL 
+      -DSYSINFO_EXPORTS -I$(BCB)\include -I$(BCB)\include\mfc -I$(BCB)\include\atl"/>
+    <CFLAG1 value="-O2 -w -VF -X- -a8 -6 -b -k -vi -q -tWM -c"/>
+    <PFLAGS value="-N2Release -N0Release -$YD -$A8"/>
+    <RFLAGS value="/l 0x409 /d &quot;NDEBUG&quot; /i$(BCB)\include;$(BCB)\include\mfc"/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value=""/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="$(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES)"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="SysInfo.bpf" FORMNAME="" UNITNAME="SysInfo" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CpuStats.cpp" FORMNAME="" UNITNAME="CpuStats" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DriveInfo.cpp" FORMNAME="" UNITNAME="DriveInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DriveStats.cpp" FORMNAME="" UNITNAME="DriveStats" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="MemoryInfo.cpp" FORMNAME="" UNITNAME="MemoryInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="OSInfo.cpp" FORMNAME="" UNITNAME="OSInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RegisterValues.cpp" FORMNAME="" UNITNAME="RegisterValues" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SocketInfo.cpp" FORMNAME="" UNITNAME="SocketInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SysInfo.cpp" FORMNAME="" UNITNAME="SysInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SysUtils.cpp" FORMNAME="" UNITNAME="SysUtils" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CpuInfo.cpp" FORMNAME="" UNITNAME="CpuInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=$(BCB)\include;$(BCB)\include\mfc;$(BCB)\include\atl
+Item1=$(BCB)\include;$(BCB)\include\mfc;$(BCB)\include\atl;
+
+[HistoryLists\hlLibraryPath]
+Count=2
+Item0=$(BCB)\lib;$(RELEASELIBPATH);$(BCB)\lib\psdk
+Item1=$(BCB)\lib;$(RELEASELIBPATH);;$(BCB)\lib\psdk;
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;SYSINFO_EXPORTS
+
+[HistoryLists\hlIntOutputDir]
+Count=1
+Item0=Release
+
+[HistoryLists\hlFinalOutputDir]
+Count=1
+Item0=Release\
+
+[HistoryLists\hlTlibPageSize]
+Count=1
+Item0=0x0010
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

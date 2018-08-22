@@ -1,0 +1,67 @@
+BOOL ValidateEMail(CString Address)
+{
+	BOOL	RtnVal = TRUE;
+//	Address = "A@b.c";    // Valid
+//	Address = "A@b.cnet"; // Invalid
+//	Address = "A@b.c_";   // Invalid
+//	Address = "A@bcnn";   // Invalid
+//	Address = "Ab.cnn";   // Invalid
+//	Address = "A@bc";     // Invalid
+//	Address = "A@bat@.cnn";  // Invalid
+//	Address = "A@bat/.com";  // Invalid
+
+	if(Address.GetLength() < 5)
+	{
+		// Too short
+		RtnVal = FALSE;
+	}
+	else if(Address.Find("@") == -1)		// Has at least 1 @
+	{
+		RtnVal = FALSE;
+	}
+	else if(Address.Find(".") == -1)		// Has a Period
+	{
+		RtnVal = FALSE;
+	}
+	else if(Address.GetLength() - Address.ReverseFind('.') > 4)		// no more than 3 characters after the final period (reverse find is 0 based not 1 based)
+	{
+		RtnVal = FALSE;
+	}
+	else if(Address.ReverseFind('_') > Address.ReverseFind('@'))	// an underscore after the @
+	{
+		RtnVal = FALSE;
+	}
+	else
+	{
+		// only 1 @
+		int		FindPos;
+		FindPos = Address.Find("@");
+		FindPos = Address.Find("@", FindPos+1);
+		if(FindPos != -1)
+		{
+			RtnVal = FALSE;
+		}
+
+		// allowed characters 0-9 A-Z _.@-
+		int		Pos;
+		int		NumChars;
+
+		NumChars = Address.GetLength();
+		Address.MakeUpper();
+
+		for(Pos = 0; Pos < NumChars; Pos ++)
+		{
+			if(
+				(!isdigit(Address[Pos]))
+				&& ((Address[Pos] < 'A') || (Address[Pos] > 'Z'))
+				&& (Address[Pos] != '_')
+				&& (Address[Pos] != '.')
+				&& (Address[Pos] != '@')
+				&& (Address[Pos] != '-'))
+			{
+				RtnVal = FALSE;
+			}
+		}
+	}
+	return RtnVal;
+}

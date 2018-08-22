@@ -1,0 +1,137 @@
+Event-Based Servers in Tcl
+by Stephen Uhler
+
+
+Listing One
+  set port 8080     ;# the port to listen on
+  set timeout 60000 ;# max seconds to wait for client request
+  set root [pwd]    ;# our document root
+
+  socket -server [list DDJaccept $root $timeout] $port
+  vwait forever
+
+Listing Two
+proc DDJaccept {root timelimit socket ip args} {
+    upvar #0 $socket request
+    array set request [list State start Root $root Ip $ip]
+    fconfigure $socket -block 0 -translation {auto crlf}
+    fileevent $socket readable [list DDJread $socket]
+    set request(Cancel) [after $timelimit [list DDJtimeout $socket]]
+}
+
+Listing Three
+proc DDJread {socket} {
+    upvar #0 $socket request
+    # unexpected EOF - abort
+    if {[eof $socket]} {
+        puts stderr "$socket: Eof ([array get request])"
+        close $socket
+        after cancel $request(Cancel)
+        unset request
+    }
+    switch $request(State) {
+        start {         # Get HTTP request line
+            gets $socket line
+            if [regexp {(POST|GET|HEAD) ([^?]+)\??([^ ]*) HTTP/1.0} \
+                    $line {} request(Proto) request(Url) request(Query)] {
+                set request(State) headers
+            } else {
+                DDJerror $socket "400 Bad Request" "Invalid request:$line"
+            }
+        }   
+        headers {
+            set count [gets $socket line]
+            if {$count == 0} {  # end of headers
+                catch {incr count $request(content-length)}
+            if {$count > 0} {
+                    fconfigure $socket -translation {binary crlf}
+                    array set request [list data {} State body Count $count]
+                } else {
+                        DDJrespond $socket
+                }
+            } elseif {[regexp {([^:]+):[    ]*(.*)}  $line {} key value]} {
+                    set key [string tolower $key]
+                    if {[info exists request($key)]} {
+
+                       append request($key) ", " $value
+                    } else {
+                        set request($key) $value
+                    }
+                    set request(Key) $key
+            } elseif {[regexp {^[   ]+(.*)} $line {} value]} {
+                    append request($request(Key)) " " $value
+            } else {
+                    DDJerror $socket "400 Bad Request" "Invalid header:$line"
+            }
+        }
+        body {
+            append request(Body) [read $socket $request(Count)]
+            set request(Count) [expr {$request(content-length) - \
+                    [string length $request(Body)]}]
+            if {$request(Count) == 0} {
+                DDJrespond $socket
+            }
+        }
+    }
+}
+
+Listing Four
+proc DDJrespond {socket} {
+    upvar #0 $socket request
+    fileevent $socket readable {}
+    after cancel $request(Cancel)
+    set fileName [DDJurlToFile $request(Root) $request(Url)]
+    if {[file isfile $fileName]} {
+        append response [DDJheaders "200 data Follows" \
+                [DDJcontentType $fileName] \
+                [file size $fileName]] \
+                "Last-Modified: [DDJdate [file mtime $fileName]]\n" 
+        puts $socket $response
+        if {$request(Proto) != "HEAD"} {
+            set in [open $fileName]
+            fconfigure $socket -translation binary
+            fconfigure $in -translation binary
+            fcopy $in $socket -command [list DDJcopyDone $socket $in]
+        } else {
+            DDJcopyDone $sock ""
+        }
+    } else {
+        DDJerror $socket "404 Not Found" "Can't find $request(Url)"
+    }
+}
+
+Listing Five
+proc DDJcopyDone {socket fd size} {
+    upvar #0 $socket request
+    puts stderr "[incr ::Ok] $request(Ip) $request(Url) ($size bytes)"
+    catch {close $fd}
+    close $socket
+    # parray request
+    unset request
+}
+
+Listing Six
+proc DDJtimeout {socket} {
+    upvar #0 $socket request
+    puts stderr "$socket: timeout ([array get request])"
+    close $socket
+    unset request
+}
+
+Listing Seven
+proc DDJcontentType {fileName} 
+  Looks at the Url suffix, and determines the HTTP document type
+proc DDJheaders {code type length}
+  Formats the standard set of HTTP headers used for replies.
+proc DDJerror {socket code reason}
+  Generates a standard error response
+proc DDJdate {seconds}
+  Formats an HTTP date string
+proc DDJurlToFile {root Url}
+  Converts a URL into a file name
+proc DDJdecode {data}
+  Converts any %xx codings embedded in a Url into the equivalent character
+  representation
+
+
+3

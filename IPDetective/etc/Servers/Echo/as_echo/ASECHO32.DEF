@@ -1,0 +1,11 @@
+;------------------------
+; Filename: ASECHO32.DEF
+;------------------------
+
+NAME      ASECHO32
+
+DESCRIPTION  'Async TCP Echo Server (c) Bob Quinn 1995'
+CODE      PRELOAD MOVEABLE DISCARDABLE
+DATA      PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE  8192

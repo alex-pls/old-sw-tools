@@ -1,0 +1,110 @@
+m///////////////////////////////////////////////////////////////////////
+//                                                                   //
+// PagerICQ - Send Messages to ICQ Pager                             //
+//                                                                   //
+//    Visual C++, Borland C++ and C++ Builder Compatible Source Code //
+//    Windows 9x, NT and 2000 Compatible                             //
+//                                                                   //
+// Function:                                                         //
+//                                                                   //
+//    ICQPager( cUIN, cMessage )                                     //
+//                                                                   //
+//       Parameters:                                                 //
+//                                                                   //
+//          cUIN     = ICQ UIN Number                                //
+//          cMessage = Message To Send                               //
+//                                                                   //
+///////////////////////////////////////////////////////////////////////
+
+#include "winsock.h"
+
+
+
+bool ICQPager( char * cUIN, char * cMessage )
+{
+   // Variables
+   struct sockaddr_in ICQServer;
+
+   WORD wVersionRequested;
+   WSADATA wsaData;
+
+   char      cEOL[] = { 13, 10, 0 };
+   char cMsg[ 512 ] = "";
+
+   bool lOK = false;
+
+   int nLoop;
+
+   // Remove Invalid Characters
+   // and... Change spaces to "+"
+   for( nLoop = 0; nLoop < strlen( cMessage ); nLoop ++ )
+   {
+        if( cMessage[ nLoop ] <  33 || 
+            cMessage[ nLoop ] > 126 || 
+            cMessage[ nLoop ] == '&' )
+        {
+            cMessage[ nLoop ] = '+';
+        }
+   }
+
+   // Start Winsock
+   wVersionRequested = MAKEWORD( 1, 0 );
+
+   if( WSAStartup( wVersionRequested, &wsaData ) == 0 )
+   {
+       // Make Socket
+       ICQServer.sin_family      = AF_INET;
+       ICQServer.sin_port        = htons( 80 );
+       ICQServer.sin_addr.s_addr = inet_addr( "205.188.147.55" ); //wwp.icq.com
+
+       int ICQSock = socket( AF_INET, SOCK_STREAM, 0 );
+
+       // Connect Server
+       if( connect( ICQSock, (struct sockaddr *) &ICQServer, sizeof( ICQServer ) ) == 0 )
+       {
+           // Make Message
+           strcpy( cMsg, "GET /scripts/WWPMsg.dll?from=anonymous&fromemail=mail@test.com&subject=pager" );
+           strcat( cMsg, "&body=" );
+           strcat( cMsg, cMessage );
+           strcat( cMsg, "&to=" );
+           strcat( cMsg, cUIN );
+           strcat( cMsg, " HTTP/1.0" );
+           strcat( cMsg, cEOL );
+           strcat( cMsg, cEOL );
+           strcat( cMsg, cEOL );
+
+           // Send Message
+           lOK = ( send( ICQSock, cMsg, strlen( cMsg ), 0 ) >= 0 );
+
+           // Reveive
+           if( lOK )
+               recv( ICQSock, cMsg, 512, 0 );
+
+           // Close Socket
+           closesocket( ICQSock );
+       }
+
+       // Close Winsock
+       WSACleanup();
+   }
+
+   // Return
+   return ( lOK );
+}
+
+
+////////////////////////
+//                    //
+// Example of the use //
+//                    //
+////////////////////////
+
+void Example()
+{
+    char * cMessage = "Message test send to ICQ Pager";
+
+    if( ICQPager( "3973927", cMessage ) )
+        // OK
+    else
+        // Error
+}
