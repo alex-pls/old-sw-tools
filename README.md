@@ -9,7 +9,7 @@ Most of the projects were **developed in 2000-2004** using *BORLAND C++ Builder 
 
 
 ## Listing
-* [FFast] - Standalone database application for managing devices catalog. (2004, Borland C++)
-* [GyMAN] - Standalone database application for managing clients of a GYM.
-* [IPDetective] - Networking tool supporting dynamic DLL plugins
+* [FFast](FFast) - Standalone database application for managing devices catalog. (2004, Borland C++)
+* [GyMAN](GyMAN) - Standalone database application for managing clients of a GYM.
+* [IPDetective](IPDetective) - Networking tool supporting dynamic DLL plugins
 
